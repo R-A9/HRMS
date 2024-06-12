@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Bare - Start Bootstrap Template</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="../css/styles.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Abel&family=Passion+One:wght@400;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Abel&family=Passion+One:wght@400;700;900&family=Teko:wght@300..700&display=swap');
+  </style>
+</head>
+
+<body>
+  <!-- Responsive navbar-->
+  <nav class="navbar navbar-light py-0 navbar-expand-lg fixed-top pb-3">
+    <div class="container-fluid">
+      <img src="../images/atlas2.png" style='width: 50px; height=50px;'>
+      <a class="navbar-brand" href="#">ATLAS-HRMS</a>
+      <div class="d-flex order-lg-1 ml-auto pr-2">
+        <!-- !!!!!!!!!!Everything below this comment, wag niyong pakikialaman!!!!!!!!!!!!!! -->
+        <span class="dot" style="color:white; padding-right: 5px;"></span>
+        <a href="#" class="navbar-text"><i class="fa fa-shopping-cart fa-lg" style="color: white;"></i></a>
+        <ul class="navbar-nav flex-row to-hide-nav">
+          <li class="nav-item mx-2 mx-lg-0">
+            <a class="nav-link" href="#"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href=""><span class="sr-only"></span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- End of untouchable code, everything below this is subject to change -->
+
+  <!-- Page content-->
+  <div class="container-fluid pt-5">
+    <div class="d-flex">
+      <div class="text-center w-25 h-100 d-grid p-2 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
+        <p class="lead pt-3">Management System</p>
+        <p>v1.0.0</p>
+        <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.html" role="button">Application</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="messages.html" role="button">Messages</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.html" role="button" style='background-color: #4DC8D9;'>Reports</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.html" role="button">Employees</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="settings.html" role="button">Settings</a>
+        <br>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
+        <br><br>
+        <br>
+      </div>
+
+      <!-- Flex container for fieldsets -->
+      <div class="d-flex flex-wrap" style="padding-left: 10px; padding-top: 10px;">
+        <!-- Start employee table -->
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Profile Picture</th>
+                <th>Personal Information</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="../images/Employee1.png" class="border border-3 border-dark" style="width: 150px; height: 130px;" alt="Profile Picture"></td>
+                <td>Joe Morant<br>JoeMorant@gmail.com</td>
+                <td><span class="fw-bolder" style="color:green;">Employed</span><br><span style="color:blue; font-size: smaller;">Passed the Prerequisites, Assigned training on March 25</span></td>
+                <td>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">View Details</button>
+                </td>
+              </tr>
+              <tr>
+                <td><img src="../images/Employee2.png" class="border border-3 border-dark" style="width: 150px; height: 130px;" alt="Profile Picture"></td>
+                <td>Jhindou Doeminguez<br>JDominguez@gmail.com</td>
+                <td><span class="fw-bolder" style="color:red;">Rejected</span><br><span style="color:darkred; font-size: smaller;">Practical hands-on Failure via Practical Examination</span></td>
+                <td>
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">View Details</button>
+                </td>
+              </tr>
+              <tr>
+                <td><img src="../images/Employee3.jpg" class="border border-3 border-dark" style="width: 150px; height: 130px;" alt="Profile Picture"></td>
+                <td>Aleksandr Khimlov<br>Akbusiness@gmail.com</td>
+                <td><span class="fw-bolder" style="color:orange;">In review</span></td>
+                <td>
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal3">View Details</button>
+                </td>
+              </tr>
+              <tr>
+                <td><img src="../images/Employee4.jpg" class="border border-3 border-dark" style="width: 150px; height: 130px;" alt="Profile Picture"></td>
+                <td>Frank Harrington<br>JDominguez@gmail.com</td>
+                <td><span class="fw-bolder" style="color:gray;">In queue</span></td>
+                <td>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal4">View Details</button>
+                </td>
+              </tr>
+              <tr>
+                <td><img src="../images/Employee5.jpg" class="border border-3 border-dark" style="width: 150px; height: 130px;" alt="Profile Picture"></td>
+                <td>Antonio Crus<br>Antoniob@gmail.com</td>
+                <td><span class="fw-bolder" style="color:orange;">In Review</span></td>
+                <td>
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal5">View Details</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- End employee table -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals for employee details with separate CRUD dropdowns -->
+  <!-- Modal 1 -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel1">Full Report</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>After passing the prerequisites, the newly employed team member was assigned training on March 25. This assignment is set to further improve their skills in line with company standards.</p>
+        </div>
+        <div class="modal-footer">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="updateDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+              Update
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="updateDropdown1">
+              <li><a class="dropdown-item" href="#">Edit Report</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="deleteDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+              Delete
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="deleteDropdown1">
+              <li><a class="dropdown-item" href="#">Remove Report</a></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2 -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel2">Full Report</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>The candidate was unable to meet the practical hands-on requirements during the examination. Consequently, their application has been rejected.</p>
+        </div>
+        <div class="modal-footer">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="updateDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+              Update
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="updateDropdown2">
+              <li><a class="dropdown-item" href="#">Edit Report</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="deleteDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+              Delete
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="deleteDropdown2">
+              <li><a class="dropdown-item" href="#">Remove Report</a></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3 -->
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel3">Full Report</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Today's interview evaluated the candidate's skills and qualifications. Their performance is currently under review to determine their suitability for the role.</p>
+        </div>
+        <div class="modal-footer">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="updateDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+              Update
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="updateDropdown3">
+              <li><a class="dropdown-item" href="#">Edit Report</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="deleteDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+              Delete
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="deleteDropdown3">
+              <li><a class="dropdown-item" href="#">Remove Report</a></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4 -->
+  <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel4">Full Report</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>The candidate is currently in queue for further assessment. Details about the next steps will be provided soon.</p>
+        </div>
+        <div class="modal-footer">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="updateDropdown4" data-bs-toggle="dropdown" aria-expanded="false">
+              Update
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="updateDropdown4">
+              <li><a class="dropdown-item" href="#">Edit Report</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="deleteDropdown4" data-bs-toggle="dropdown" aria-expanded="false">
+              Delete
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="deleteDropdown4">
+              <li><a class="dropdown-item" href="#">Remove Report</a></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5 -->
+  <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel5" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel5">Full Report</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Yesterday's interview evaluated the candidate's skills and qualifications. Their performance is currently under review to determine their suitability for the role.</p>
+        </div>
+        <div class="modal-footer">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="updateDropdown5" data-bs-toggle="dropdown" aria-expanded="false">
+              Update
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="updateDropdown5">
+              <li><a class="dropdown-item" href="#">Edit Report</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="deleteDropdown5" data-bs-toggle="dropdown" aria-expanded="false">
+              Delete
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="deleteDropdown5">
+              <li><a class="dropdown-item" href="#">Remove Report</a></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>

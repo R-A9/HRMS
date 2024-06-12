@@ -1,10 +1,7 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-
-
-<!--  <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-        <a class="btn btn-light btn-md  btn-block border border-1 border-dark fw-bolder" href="index.html"
-            role="button">HRMS Login</a> -->
 
 
 
@@ -25,19 +22,10 @@
 </head>
 
 <body>
-    <nav class="navbar border-bottom border-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" style='color:black;' href="main-page.html">
-                <img src="../atlas2.png" alt="" width="60" height="60" class="d-inline-block align-text-center">
-                Atlas IT Solutions
-            </a>
 
-            <form class="d-flex">
-                <a class="btn" style='background-color: #D9D9D9;' href="../main-page.html">Back</a>
-            </form>
-        </div>
-    </nav>
-
+<div class="p-2">
+<a href="../hrms-inner/main-page.html" class="btn btn-outline-dark btn-xs" type="submit">Back</a>
+</div>
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -47,17 +35,29 @@
 
                             <div class="mb-md-5 mt-md-4 pb-5">
 
-                                <h2 class="fw-bold mb-2 pb-5">Atlas IT Solutions Login</h2>
+                                <!-- Form start-->
+                                <form action="../functions/hrlogin-function.php" method="post">
+
+
+                                <h2 class="fw-bold mb-2 pb-5">Atlas IT HR Login</h2>
+
+                                <?php
+                                if(isset($_SESSION["error"])){
+                                    $error = $_SESSION["error"];
+                                    echo "<span>$error</span>";
+                                }
+                            ?>  
+
 
                                 <div data-mdb-input-init class="form-outline form-dark mb-4">
                                     <p class="text-start">Email</label>
-                                        <input type="email" id="typeEmailX" class="form-control form-control-xs" />
+                                        <input type="email" id="email" name="email" class="form-control form-control-xs" />
 
                                 </div>
 
                                 <div data-mdb-input-init class="form-outline form-white mb-4 pt-3">
                                     <p class="text-start">Password</label>
-                                        <input type="password" id="typePasswordX"
+                                        <input type="password" id="password" name="password"
                                             class="form-control form-control-md" />
 
                                 </div>
@@ -65,13 +65,17 @@
 
                                 </p>
 
-                                <a href='../index.html' class="btn btn-outline-dark btn-lg px-5" type="submit">Login</a>
-
+                                <button type="submit" class="btn btn-outline-dark btn-lg px-5" type="submit">Login</button>
+                                <div class="small text-muted pt-3">Click <a href='login.php'>here</a> for Employee Login</div>
                             </div>
+                            </form>
 
+                            <!-- Form end -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    </body>
+    </html>
