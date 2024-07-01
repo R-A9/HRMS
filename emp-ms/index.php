@@ -62,7 +62,7 @@
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" role="button">Leave Mgmt.</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="messages.html" role="button">Messages</a>
         <br>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="../hrms-inner/main-page.html" role="button">Log-out</a>
         <br><br>
         <br>
       </div>

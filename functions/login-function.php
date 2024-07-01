@@ -18,7 +18,7 @@
         $count = mysqli_num_rows($result);  
           
         if($count == 1){  
-            header('Location: ../hrms-inner/index.html');  
+            header('Location: ../emp-ms/index.php');  
         }  
         else{  
             $_SESSION["error"] = $error;

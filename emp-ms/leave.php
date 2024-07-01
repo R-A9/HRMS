@@ -12,9 +12,20 @@
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="../css/styles.css" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Abel&family=Passion+One:wght@400;700;900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Abel&family=Passion+One:wght@400;700;900&family=Teko:wght@300..700&display=swap');
+  
+
+    .card {
+      max-width: 700px;
+      padding: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.25rem;
+    }
   </style>
 </head>
 
@@ -22,7 +33,7 @@
   <!-- Responsive navbar-->
   <nav class="navbar navbar-light py-0 navbar-expand-lg fixed-top pb-3">
     <div class="container-fluid">
-      <img src="../images/atlas2.png" style='width: 50px; height=50px;'>
+      <img src="../images/atlas2.png" style="width: 50px; height: 50px;">
       <a class="navbar-brand" href="#">ATLAS-HRMS</a>
       <div class="d-flex order-lg-1 ml-auto pr-2">
         <!-- !!!!!!!!!!Everything below this comment, wag niyong pakikialaman!!!!!!!!!!!!!! -->
@@ -44,7 +55,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href=""><span class="sr-only"></span></a>
+            <a class="nav-link" href="#"><span class="sr-only"></span></a>
           </li>
         </ul>
       </div>
@@ -59,24 +70,57 @@
       <div class="text-center w-25 h-100 d-grid p-2 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
         <p class="lead pt-3">Management System</p>
         <p>v1.0.0</p>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" style='background-color: #4DC8D9;' role="button">Leave Mgmt.</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="messages.php" role="button">Messages</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" style="background-color: #4DC8D9;" role="button">Leave Mgmt.</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="messages.html" role="button">Messages</a>
         <br>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="../hrms-inner/main-page.html" role="button">Log-out</a>
         <br><br>
         <br>
       </div>
 
       <!-- Flex container for fieldsets -->
-      <div class="d-flex flex-wrap" style="padding-left: 10px; padding-top: 10px;">
-        <!-- Start employee table -->
-        
+      <div class="flex-grow-1 p-4">
+      <h1>Leave Application</h1>
+      <hr>
+        <!-- Start main code -->
+        <div class="container d-flex justify-content-center">
+          <div class="p-4 w-100" style="max-width: 700px;">
+
+
+
+            
+            <form method="post" action="action.php">
+              <div class="form-group mb-3">
+                <label for="start-date"><h3>Start Date:</h3></label>
+                <input type="date" class="form-control" id="sdate" name="sdate" required>
+              </div>
+              <div class="form-group mb-3">
+                <label for="end-date"><h3>End Date:</h3></label>
+                <input type="date" class="form-control" id="edate" name="edate" required>
+              </div>
+              <div class="form-group mb-4">
+                <label for="reason"><h3>Reason:</h3></label>
+                <select class="form-control" id="reason" name="reason" required>
+                  <option value="" disabled selected><h3>Select a reason</h3></option>
+                  <option value="personal">Personal</option>
+                  <option value="sick">Sick</option>
+                  <option value="vacation">Vacation</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-success btn-block">Apply</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
   <!-- Core theme JS-->
-  <script src="js/scripts.js"></script>
+  <script src="../js/scripts.js"></script>
 </body>
 
 </html>
