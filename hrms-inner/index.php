@@ -1,3 +1,14 @@
+<?php 
+$pdo = require "../functions/db-conn.php";
+session_start();
+if (isset($_SESSION['uid'])) { 
+  
+
+  
+  
+  ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +25,11 @@
 </head>
 
 <body>
+
+<?php/* if ($_SESSION['role'] == 'Employee') {
+    header('Location: ../emp-ms/index.php');
+  }*/
+ ?>
     <!-- Responsive navbar-->
 
     <nav class="navbar navbar-expand-lg navbar-light border-bottom">
@@ -36,13 +52,12 @@
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="application.html"
                     role="button">Application</a>
 
-                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="messages.html"
-                    role="button">Messages</a>
-                <a class="btn  btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.html"
+                <a class="btn  btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.php"
                     role="button">Reports</a>
 
-                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.html"
+                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.php"
                     role="button">Employees</a>
+                    <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.php" role="button" >Leave Management</a>
                 <br>
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="../login/login.php"
                     role="button">Log-out</a>
@@ -58,3 +73,8 @@
 
 </html>
 
+<?php 
+}else{
+	header("Location: login/login.php");
+} 
+?>

@@ -16,21 +16,17 @@ include '../functions/db-conn.php';
         // Taking all 5 values from the form data(input)
         $sdate =  $_REQUEST['sdate'];
         $edate = $_REQUEST['edate'];
-        $reason =  $_REQUEST['reason'];
+        $reason =  $_POST['reason'];
+        $empid = 6710;
         $status = 'pending';
         
         // Performing insert query execution
         // here our table name is college
         $sql = "INSERT INTO leaveapp VALUES ('$sdate', 
-            '$edate','$reason','$status')";
+            '$edate','$reason','$status','$empid')";
         
         if(mysqli_query($conn, $sql)){
-            echo "<h3>data stored in a database successfully." 
-                . " Please browse your localhost php my admin" 
-                . " to view the updated data</h3>"; 
-
-            echo nl2br("\n$sdate\n $edate\n "
-                . "$reason\n");
+           header['Location: leave.php'];
         } else{
             echo "ERROR: Hush! Sorry $sql. " 
                 . mysqli_error($conn);

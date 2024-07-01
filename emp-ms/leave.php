@@ -1,3 +1,11 @@
+<?php
+ session_start();
+
+
+ if (isset($_SESSION['user'])) {
+ ?> 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,13 +108,7 @@
               </div>
               <div class="form-group mb-4">
                 <label for="reason"><h3>Reason:</h3></label>
-                <select class="form-control" id="reason" name="reason" required>
-                  <option value="" disabled selected><h3>Select a reason</h3></option>
-                  <option value="personal">Personal</option>
-                  <option value="sick">Sick</option>
-                  <option value="vacation">Vacation</option>
-                  <option value="other">Other</option>
-                </select>
+                <textarea class="form-control" id="reason" name="reason" placeholder="Your reason here.." required></textarea>
               </div>
               <button type="submit" class="btn btn-success btn-block">Apply</button>
             </form>
@@ -124,3 +126,8 @@
 </body>
 
 </html>
+<?php 
+}else{
+	header("Location: ../login/login.php");
+} 
+?>

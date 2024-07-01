@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +59,7 @@
   <div class="container-fluid pt-5">
     <div class="d-flex">
       <div class="text-center w-25 h-100 d-grid p-2 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
-        <p class="lead pt-3">Management System</p>
+        <p class="lead pt-3">Employee System</p>
         <p>v1.0.0</p>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" role="button">Leave Mgmt.</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="messages.html" role="button">Messages</a>

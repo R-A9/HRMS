@@ -1,3 +1,7 @@
+<?
+include "../functions/db-conn.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +32,7 @@
     <nav class="navbar border-bottom border-dark">
         <div class="container-fluid">
             <a class="navbar-brand" style='color:black;' href="main-page.html">
-                <img src="../atlas2.png" alt="" width="60" height="60" class="d-inline-block align-text-center">
+                <img src="../images/atlas2.png" alt="" width="60" height="60" class="d-inline-block align-text-center">
                 Atlas IT Solutions
             </a>
 
@@ -86,7 +90,7 @@
 
                                 </div>
                                 <div class="col-md-9 pe-5">
-                                    <input type="text" name="flname" class="form-control form-control-lg" placeholder="+(Country Code)" required />
+                                    <input type="text" name="contno" class="form-control form-control-lg" placeholder="+(Country Code)" required />
 
                                 </div>
                             </div>
@@ -117,19 +121,7 @@
 
                                 </div>
                                 <div class="col-md-9 pe-5">
-                                    <input type="text" name="flname" class="form-control form-control-lg" placeholder="Role" required />
-
-                                </div>
-                            </div>
-<hr>
-                            <div class="row align-items-center py-3">
-                                <div class="col-md-3 ps-5">
-
-                                    <h6 class="mb-0">Full Home Address</h6>
-
-                                </div>
-                                <div class="col-md-9 pe-5">
-                                    <input type="text" name="flname" class="form-control form-control-lg" placeholder="Address" required />
+                                    <input type="text" name="role" class="form-control form-control-lg" placeholder="Role" required />
 
                                 </div>
                             </div>
@@ -155,8 +147,8 @@
                             <hr class="mx-n3">
 
                             <div class="px-5 py-4">
-                                <center><a href="submitted.html" style='font-weight: 600; font-size: 20pt;'
-                                        class="btn btn-primary">Submit</a></center>
+                                <center><input type="submit" name="resume" href="submitted.html" style='font-weight: 600; font-size: 20pt;'
+                                        class="btn btn-primary"></center></input>
                             </div>
                             <center><div class="small text-muted mt-2">Already sent an application? Click <a href="tempview.html">here</a></div></center>
                         </form>
@@ -167,3 +159,5 @@
             </div>
         </div>
     </section>
+    </body>
+    </html>

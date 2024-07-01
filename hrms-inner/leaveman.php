@@ -1,3 +1,17 @@
+<?php
+
+require_once('../functions/db-conn.php');
+$query = "select * from leaveapp INNER JOIN empcred WHERE status='pending'";
+$result = mysqli_query($conn,$query);
+/*
+session_start();
+if (isset($_SESSION['username'])) { {
+
+}*/
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,11 +61,10 @@
       <div class="text-center w-25 h-100 d-grid p-3 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
         <p class="lead pt-3">Management System</p>
         <p>v1.0.0</p>
-        <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.html" role="button">Application</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="messages.html" role="button">Messages</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.html" role="button">Reports</a>
+        <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.php" role="button">Reports</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.html" role="button">Employees</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.html" role="button" style='background-color: #4DC8D9;'>Leave Management</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.php" role="button" style='background-color: #4DC8D9;'>Leave Management</a>
         <br>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
         <br><br>
@@ -66,23 +79,45 @@
       </div>
     </div>
         <div class="p-5 table-responsive">
-          <table class="table table-bordered table-striped">
+          <table id="table" class="table table-bordered table-striped">
             <thead class="thead-dark">
               <tr>
                 <th scope="col" class="text-center">ID</th>
                 <th scope="col" class="text-center">Name</th>
-                <th scope="col" class="text-center">Department</th>
+                <th scope="col" class="text-center">Start Date</th>
+                <th scope="col" class="text-center">End Date</th>
+                <th scope="col" class="text-center">Reason</th>
                 <th scope="col" class="text-center">Status</th>
-                <th scope="col" class="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row" class="text-center">1</th>
-                <td class="text-center">John Doe</td>
-                <td class="text-center">Sales</td>
-                <td class="text-center">Active</td>
-                <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#statusModal1">View Details</button></td>
+                
+              <?php
+
+                while($row = mysqli_fetch_assoc($result))
+                {
+                  ?>
+                  <td class="text-center"><?php echo $row['id']; ?></td>
+                  <td class="text-center"><?php echo $row['name']; ?></td>
+                  <td class="text-center"><?php echo $row['sdate']; ?></td>
+                  <td class="text-center"><?php echo $row['edate']; ?></td>
+                  <td class="text-center"><?php echo $row['reason']; ?></td>
+                  <td class="text-center"><?php echo $row['status']; ?></td>
+
+
+                  <td class="text-center">
+		<form action="leaveman.php" method="POST">
+		<input type="hidden" name="id" value="<?php echo $row['id']; ?>"/>
+		<input type="submit" class='btn btn-primary' name="approve" value="approve">  
+		 <input type="submit" class='btn btn-danger' name="delete" value="decline"> 
+
+		</form>
+   </td>
+                </tr>
+                <?php 
+                }
+              ?>
               </tr>
 
 
@@ -90,30 +125,6 @@
           </table>
         </div>
       </div>
-    
-      <!-- Modal 1 -->
-      <div class="modal fade" id="statusModal1" tabindex="-1" aria-labelledby="statusModalLabel1" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="statusModalLabel1">Leave Application Details</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p><strong>Name:</strong> John Doe</p>
-              <p><strong>Department:</strong> Sales</p>
-              <p><strong>Leave Status:</strong> Pending</p>
-              <p><strong>Approved by:</strong> Sarah Lee</p>
-            </div>
-            <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Approve</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
       </div>
     
     
@@ -131,3 +142,27 @@
 </body>
 
 </html>
+<?php /*
+}else{
+	header("Location: ../login/login.php");
+} */
+
+ 
+if(isset($_POST['approve'])){
+
+	$id = $_POST['id'];
+	$select = "UPDATE leaveapp SET status = 'approved' WHERE id = '$id' ";
+	$resut = mysqli_query($conn,$select);
+	header("location:leaveman.php");
+}
+
+
+if(isset($_POST['delete'])){
+
+	$id = $_POST['id'];
+	$select = "UPDATE leaveapp SET status = 'declined' WHERE id = '$id' ";
+	$resut = mysqli_query($conn,$select);
+	header("location:leaveman.php");
+}
+
+ ?>

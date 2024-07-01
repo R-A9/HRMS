@@ -1,56 +1,54 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "hrms";
+// Define allowed file extensions
+$allowedExtensions = ["pdf", "doc", "docx"];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = htmlspecialchars($_POST['flname']);
-    $email = htmlspecialchars($_POST['email']);
-    $date = htmlspecialchars($_POST['date']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Check if a file was uploaded
+  if (isset($_FILES['file'])) {
+    $fileName = $_FILES['file']['name'];
+    $fileSize = $_FILES['file']['size'];
+    $fileTmpName = $_FILES['file']['tmp_name'];
+    $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
     $uploadDir = 'uploads/';
 
-    // Ensure the uploads directory exists
+    // Check for upload errors
+    if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+      echo "Upload error: " . $_FILES['file']['error'];
+      exit();
+    }
+
+    // Check file size limit (optional)
+    if ($fileSize > 5000000) { // 5 MB limit
+      echo "Sorry, your file is too large.";
+      exit();
+    }
+
+    // Check allowed file types
+    if (!in_array($fileType, $allowedExtensions)) {
+      echo "Sorry, only PDF, DOC, and DOCX files are allowed.";
+      exit();
+    }
+
+    // Create uploads directory if it doesn't exist
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0755, true);
+      mkdir($uploadDir, 0755, true);
     }
 
-    $uploadFile = $uploadDir . basename($_FILES['resume']['name']);
-    $fileType = strtolower(pathinfo($uploadFile, PATHINFO_EXTENSION));
+    // Generate a unique filename to prevent conflicts
+    $newFileName = uniqid('', true) . '.' . $fileType;
+    $uploadFile = $uploadDir . $newFileName;
 
-    // Check if the file is a valid type
-    $validTypes = array('pdf', 'doc', 'docx');
-    if (in_array($fileType, $validTypes)) {
-        if (move_uploaded_file($_FILES['resume']['tmp_name'], $uploadFile)) {
-            // Prepare and bind
-            $stmt = $conn->prepare("INSERT INTO applications (name, email, date, resume) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("sss", $name, $email, $date, $uploadFile);
-
-            if ($stmt->execute()) {
-                echo "The file " . htmlspecialchars(basename($_FILES['resume']['name'])) . " has been uploaded and data inserted into the database.<br>";
-                echo "Name: $name<br>Email: $email<br>";
-            } else {
-                echo "Error: " . $stmt->error;
-            }
-
-            $stmt->close();
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-        }
+    // Move uploaded file to the destination directory
+    if (move_uploaded_file($fileTmpName, $uploadFile)) {
+      echo "The file " . htmlspecialchars($fileName) . " has been uploaded successfully.";
+      // You can further process the uploaded file here (e.g., store filename in database)
     } else {
-        echo "Invalid file type. Only PDF, DOC, and DOCX files are allowed.";
+      echo "Sorry, there was an error uploading your file.";
     }
+  } else {
+    echo "No file selected.";
+  }
 } else {
-    echo "Invalid request method.";
+  echo "Invalid request method.";
 }
-
-$conn->close();
 ?>

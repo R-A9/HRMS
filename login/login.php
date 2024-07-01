@@ -1,81 +1,61 @@
-
-
+<?php 
+   session_start();
+   if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {   ?>
 <!DOCTYPE html>
-<html lang="en">
-
-
-
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Bare - Start Bootstrap Template</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+	<title>multi-user role-based-login-system</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
-
 <body>
+      <div class="container d-flex justify-content-center align-items-center"
+      style="min-height: 100vh">
+      	<form class="border shadow p-3 rounded"
+      	      action="../functions/login-function.php" 
+      	      method="post" 
+      	      style="width: 450px;">
+      	      <h1 class="text-center p-3">LOGIN</h1>
+      	      <?php if (isset($_GET['error'])) { ?>
+      	      <div class="alert alert-danger" role="alert">
+				  <?=$_GET['error']?>
+			  </div>
+			  <?php } ?>
+		  <div class="mb-3">
+		    <label for="username" 
+		           class="form-label">User name</label>
+		    <input type="text" 
+		           class="form-control" 
+		           name="email" 
+		           id="username">
+		  </div>
+		  <div class="mb-3">
+		    <label for="password" 
+		           class="form-label">Password</label>
+		    <input type="password" 
+		           name="password" 
+		           class="form-control" 
+		           id="password">
+		  </div>
+		  <div class="mb-1">
+		    <label class="form-label">Select User Type:</label>
+		  </div>
+		  <select class="form-select mb-3"
+		          name="role" 
+		          aria-label="Default select example">
+			  <option selected value="Employee">Employee</option>
+			  <option value="HR">HR</option>
+		  </select>
+		 
+		  <button type="submit" 
+		          class="btn btn-primary">LOGIN</button>
+		</form>
+      </div>
+</body>
+</html>
+<?php 
+}else{
+	header("Location: home.php");
+}
 
-<div class="p-2">
-<a href="../hrms-inner/main-page.html" class="btn btn-outline-dark btn-xs" type="submit">Back</a>
-</div>
-    <section class="vh-100 gradient-custom">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class=" text-dark" style="border-radius: 1rem;">
-                        <div class="card-body p-8 text-center">
 
-                            <div class="mb-md-5 mt-md-4 pb-5">
-
-                                <!-- Form start-->
-                                <form action="../functions/login-function.php" method="post">
-
-
-                                <h2 class="fw-bold mb-2 pb-5">Atlas IT Employee Login</h2>
-
-                                <?php
-                                if(isset($_SESSION["error"])){
-                                    $error = $_SESSION["error"];
-                                    echo "<span>$error</span>";
-                                }
-                            ?>  
-
-
-                                <div data-mdb-input-init class="form-outline form-dark mb-4">
-                                    <p class="text-start">Email</label>
-                                        <input type="email" id="email" name="email" class="form-control form-control-xs" />
-
-                                </div>
-
-                                <div data-mdb-input-init class="form-outline form-white mb-4 pt-3">
-                                    <p class="text-start">Password</label>
-                                        <input type="password" id="password" name="password"
-                                            class="form-control form-control-md" />
-
-                                </div>
-
-
-                                </p>
-
-                                <button type="submit" class="btn btn-outline-dark btn-lg px-5" type="submit">Login</button>
-                                <div class="small text-muted pt-3">Click <a href='hr.php'>here</a> for HR Login</div>
-                            </div>
-                            </form>
-
-                            <!-- Form end -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    </body>
-    </html>
+?>

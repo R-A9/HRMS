@@ -1,27 +1,39 @@
-<?php      
-    include('db-conn.php');  
-    $username = $_POST['email'];  
-    $password = $_POST['password'];  
+<?php
+include("db-conn.php");
+session_start();
 
-    $error = "username/password incorrect";
+if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-      
-        //to prevent from mysqli injection  
-        $username = stripcslashes($username);  
-        $password = stripcslashes($password);  
-        $username = mysqli_real_escape_string($conn, $username);  
-        $password = mysqli_real_escape_string($conn, $password);  
-      
-        $sql = "select * from empcred where email = '$username' and password = '$password'";  
-        $result = mysqli_query($conn, $sql);  
-        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
-        $count = mysqli_num_rows($result);  
-          
-        if($count == 1){  
-            header('Location: ../emp-ms/index.php');  
-        }  
-        else{  
-            $_SESSION["error"] = $error;
-    header("location: ../login/login.php");  
-        }     
-?>  
+  $myusername = mysqli_real_escape_string($conn,$_POST['email']);
+  $mypassword = mysqli_real_escape_string($conn,$_POST['password']);
+
+  $sql = "SELECT * FROM credentials WHERE email = '$myusername' and password = '$mypassword'";
+  $result = mysqli_query($conn,$sql);
+  $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+  $active = isset($row['active']);
+  $count = mysqli_num_rows($result);
+
+  $role = isset($row['role']);
+
+    if($role == 'HR'){
+        $link = '../hrms-inner/index.php';
+    }
+    elseif($role == 'Employee'){
+        $link = '../emp-ms/index.php';
+    }
+    else{
+        $link = '404.php';
+    }
+
+  if($count == 1) {
+    $_SESSION['name'] = $row['name'];
+        		$_SESSION['uid'] = $row['id'];
+        		$_SESSION['role'] = $row['role'];
+
+    header("Location: ".$link."");
+    exit(); 
+  }else {
+     $error = "Your Login Name or Password is invalid";
+  }
+}
+?>
