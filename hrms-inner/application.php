@@ -1,3 +1,11 @@
+<?php
+
+require_once('../functions/db-conn.php');
+$query = "select * from applications";
+$result = mysqli_query($conn,$query);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,9 +38,9 @@
         <div class="text-center w-25 h-100 d-grid p-3 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
             <p class="lead pt-3">Management System</p>
             <p>v1.0.0</p>
-            <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
+            <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.html" role="button" style='background-color: #4DC8D9;'>Application</a>
             <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.php" role="button">Reports</a>
-            <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.html" role="button" style='background-color: #4DC8D9;'>Employees</a>
+            <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.html" role="button">Employees</a>
             <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.php" role="button">Leave Management</a>
             <br>
             <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
@@ -100,30 +108,39 @@
 <body>
   <div class="content">
     <div class="header">
-      <h2 class="">Employees</h2>  
+      <h2 class="">Application</h2>  
   </div>
 </div>
 <div class="p-5 table-responsive">
-  <table class="table table-bordered table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col" class="text-center">ID</th>
-        <th scope="col" class="text-center">Name</th>
-        <th scope="col" class="text-center">E-mail</th>
-        <th scope="col" class="text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row" class="text-center">1</th>
-        <td class="text-center">John Doe</td>
-        <td class="text-center">john.doe@yahoo.com</td>
-        <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#statusModal1">View Details</button></td>
-      </tr>
-
-    </tbody>
-  </table>
-</div>
+          <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">E-mail</th>
+                <th scope="col" class="text-center">Contact Number</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+                
+                <?php
+  
+                  while($row = mysqli_fetch_assoc($result))
+                  {
+                    ?>
+                    <td class="text-center"><?php echo $row['id']; ?></td>
+                    <td class="text-center"><?php echo $row['flname']; ?></td>
+                    <td class="text-center"><?php echo $row['email']; ?></td>
+                    <td class="text-center"><?php echo $row['contno']; ?></td>
+                  </tr>
+                  <?php 
+                  }
+                ?>
+                </tr>
+            </tbody>
+          </table>
+        </div>
 </div>
 
 <!-- Modal 1 -->
@@ -131,19 +148,15 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="statusModalLabel1">Employee Details: John Doe</h5>
+      <h5 class="modal-title" id="statusModalLabel1">Application Details: John Doe</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <p><strong>Name:</strong> John Doe</p>
-      <p><strong>E-mail:</strong> john.doe@yahoo.com</p>
-      <p><strong>Contact No: </strong>+639049918475</p>
-      <p><strong>Role: </strong>System Admin</p>
+      <p><strong>CV: &nbsp;</strong><button type="button" class="btn btn-primary" data-dismiss="modal">View CV</button></p>
     </div>
     <div class="modal-footer">
-      <input type="submit" class="btn btn-danger" value='Fire Employee' data-dismiss="modal">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
   </div>
@@ -151,15 +164,16 @@
 </div>
 
 </div>
-  
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
-</html>
 
 <!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
+
 
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
