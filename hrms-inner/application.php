@@ -3,6 +3,8 @@
 require_once('../functions/db-conn.php');
 $query = "select * from applications";
 $result = mysqli_query($conn,$query);
+session_start();
+if (isset($_SESSION['uid'])) { 
 
 ?>
 
@@ -14,11 +16,44 @@ $result = mysqli_query($conn,$query);
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Bare - Start Bootstrap Template</title>
+  <title>ATLAS</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="../css/styles.css" rel="stylesheet" />
+  <style>
+            .header {
+                    width: 100%;
+                    text-align: left;
+                    padding: 10px 0;
+                    background-color: #fff;
+                    border-bottom: 1px solid #ccc;
+                }
+                .content {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 20px;
+                }
+
+        tbody{
+          height:150px;
+          overflow:auto;
+        }
+
+                /* If the screen size is 1200px wide or more, set the font-size to 80px */
+@media (min-width: 1200px) {
+  .responsive-font-example {
+    font-size: 20px;
+  }
+}
+/* If the screen size is smaller than 1200px, set the font-size to 80px */
+@media (max-width: 1199.98px) {
+  .responsive-font-example {
+    font-size: 10px;
+  }
+}
+  </style>
 </head>
 
 <body>
@@ -38,9 +73,9 @@ $result = mysqli_query($conn,$query);
         <div class="text-center w-25 h-100 d-grid p-3 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
             <p class="lead pt-3">Management System</p>
             <p>v1.0.0</p>
-            <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.html" role="button" style='background-color: #4DC8D9;'>Application</a>
+            <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.php" role="button" style='background-color: #4DC8D9;'>Application</a>
             <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.php" role="button">Reports</a>
-            <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.html" role="button">Employees</a>
+            <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.php" role="button">Employees</a>
             <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.php" role="button">Leave Management</a>
             <br>
             <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
@@ -50,61 +85,7 @@ $result = mysqli_query($conn,$query);
 
         
       <div class='col'>
- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Management System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            width: 98%;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        .action-button {
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .action-button:hover {
-            background-color: #ff3333;
-        }
 
-        .header {
-                    width: 100%;
-                    text-align: left;
-                    padding: 10px 0;
-                    background-color: #fff;
-                    border-bottom: 1px solid #ccc;
-                }
-                .content {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    padding: 20px;
-                }
-    </style>
-</head>
 <body>
   <div class="content">
     <div class="header">
@@ -182,3 +163,7 @@ $result = mysqli_query($conn,$query);
 </body>
 
 </html>
+<?php
+}else{
+	header("Location: ../login/login.php");
+} ?>

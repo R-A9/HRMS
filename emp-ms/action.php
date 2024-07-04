@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 
 include '../functions/db-conn.php';
         // servername => localhost
@@ -16,17 +17,15 @@ include '../functions/db-conn.php';
         // Taking all 5 values from the form data(input)
         $sdate =  $_REQUEST['sdate'];
         $edate = $_REQUEST['edate'];
-        $reason =  $_POST['reason'];
-        $empid = 6710;
+        $reason =  $_REQUEST['reason'];
+        $empid = $_SESSION['uid'];
         $status = 'pending';
         
-        // Performing insert query execution
-        // here our table name is college
-        $sql = "INSERT INTO leaveapp VALUES ('$sdate', 
-            '$edate','$reason','$status','$empid')";
+
+        $sql = "INSERT INTO leaveapp VALUES ('id', '$sdate', '$edate','$reason', '$status', '$empid')";
         
         if(mysqli_query($conn, $sql)){
-           header['Location: leave.php'];
+        header('Location: leave.php');
         } else{
             echo "ERROR: Hush! Sorry $sql. " 
                 . mysqli_error($conn);

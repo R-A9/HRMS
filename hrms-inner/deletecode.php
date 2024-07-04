@@ -4,7 +4,7 @@ $db = mysqli_select_db($connection,'hrms');
 if (isset($_POST['deletedata'])) {
     $id = $_POST['delete_id'];
 
-    $query = "DELETE FROM credentials WHERE id='$id'";
+    $query = "DELETE FROM leaveapp WHERE id='$id'";
     $query_run = mysqli_query($connection, $query);
 
     if ($query_run) {

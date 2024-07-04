@@ -5,6 +5,8 @@ require_once('../functions/db-conn.php');
 // Fetch applications data
 $query = "SELECT * FROM applications";
 $result = mysqli_query($conn, $query);
+session_start();
+if (isset($_SESSION['role']) == "Employee") { 
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +16,7 @@ $result = mysqli_query($conn, $query);
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Bare - Start Bootstrap Template</title>
+  <title>ATLAS</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Core theme CSS (includes Bootstrap)-->
@@ -36,7 +38,18 @@ $result = mysqli_query($conn, $query);
                     align-items: center;
                     padding: 20px;
                 }
-
+            /* If the screen size is 1200px wide or more, set the font-size to 80px */
+@media (min-width: 1200px) {
+  .responsive-font-example {
+    font-size: 20px;
+  }
+}
+/* If the screen size is smaller than 1200px, set the font-size to 80px */
+@media (max-width: 1199.98px) {
+  .responsive-font-example {
+    font-size: 10px;
+  }
+}
   </style>
 </head>
 <body>
@@ -56,7 +69,7 @@ $result = mysqli_query($conn, $query);
         <!-- Sidebar content here -->
         <p class="lead pt-3">Management System</p>
         <p>v1.0.0</p>
-        <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
+        <a class="btn btn-lg btn-light btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.php" role="button" style='background-color: #4DC8D9;'>Reports</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.php" role="button">Employees</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.php" role="button">Leave Management</a>
@@ -78,7 +91,7 @@ $result = mysqli_query($conn, $query);
                 <th scope="col" class="text-center">ID</th>
                 <th scope="col" class="text-center">Name</th>
                 <th scope="col" class="text-center">E-mail</th>
-                <th scope="col" class="text-center">Resume</th>
+                <th scope="col" class="text-center">Date Provided</th>
                 <th scope="col" class="text-center">Role</th>
                 <th scope="col" class="text-center">Contact Number</th>
                 <th scope="col" class="text-center">Status</th>
@@ -98,7 +111,7 @@ $result = mysqli_query($conn, $query);
                   <td class="text-center"><?php echo $row['contno']; ?></td>
                   <td class="text-center"><?php echo $row['status']; ?></td>
                   <td class="text-center">
-                    <button class='btn btn-primary' onclick="updateStatus(<?php echo $row['id']; ?>, 'approved')">Approve</button>
+                    <button class='btn btn-primary' name="approve" onclick="updateStatus(<?php echo $row['id']; ?>, 'approved')">Approve</button>
                     <button class='btn btn-danger' onclick="updateStatus(<?php echo $row['id']; ?>, 'declined')">Decline</button>
                   </td>
                 </tr>
@@ -119,25 +132,39 @@ $result = mysqli_query($conn, $query);
   <script src="js/scripts.js"></script>
 
   <script>
-    function updateStatus(id, status) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'update-status.php', true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onload = function() {
+function updateStatus(id, status) {
+    var row = document.getElementById('row_' + id);
+    var flname = row.querySelector('td:nth-child(2)').textContent;
+    var email = row.querySelector('td:nth-child(3)').textContent;
+    var role = row.querySelector('td:nth-child(5)').textContent;
+    var contno = row.querySelector('td:nth-child(6)').textContent;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'update-status.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
         if (xhr.status === 200) {
-          alert('Status updated successfully');
-          document.getElementById('row_' + id).querySelector('td:nth-child(7)').textContent = status; // Update status cell in the table
+            alert('Status updated successfully');
+            document.getElementById('row_' + id).querySelector('td:nth-child(7)').textContent = status; // Update status cell in the table
+            
+            // Hide the approve and decline buttons
+            row.querySelector('td:nth-child(8)').innerHTML = ''; 
         } else {
-          alert('Error updating status');
+            alert('Error updating status');
         }
-      };
-      xhr.send('id=' + id + '&status=' + status);
-    }
+    };
+
+    xhr.send('id=' + id + '&status=' + status + '&flname=' + flname + '&email=' + email + '&role=' + role + '&contno=' + contno);
+}
   </script>
 </body>
 </html>
 
 <?php
+}else{
+	header("Location: ../login/login.php");
+} 
+
 // PHP script to handle AJAX request and update status in the database
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id']) && isset($_POST['status'])) {

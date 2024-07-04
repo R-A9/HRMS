@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+
+
+print_r($_SESSION);
+ if (isset($_SESSION['uid'])) {
+ ?> 
 
 
 <!DOCTYPE html>
@@ -8,7 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Bare - Start Bootstrap Template</title>
+  <title>ATLAS</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Core theme CSS (includes Bootstrap)-->
@@ -61,8 +69,8 @@
       <div class="text-center w-25 h-100 d-grid p-2 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
         <p class="lead pt-3">Employee System</p>
         <p>v1.0.0</p>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" role="button">Leave Mgmt.</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="messages.html" role="button">Messages</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" role="button">Leave Application</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leavemgmt.php" role="button">Leave Mgmt.</a>
         <br>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="../hrms-inner/main-page.html" role="button">Log-out</a>
         <br><br>
@@ -82,3 +90,8 @@
 </body>
 
 </html>
+<?php 
+}else{
+	header("Location: ../login/login.php");
+} 
+?>

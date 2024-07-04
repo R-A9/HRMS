@@ -1,7 +1,9 @@
 <?php
 require_once('../functions/db-conn.php');
-$query = "SELECT * FROM credentials";
+$query = "SELECT * FROM credentials WHERE role = 'Employee'";
 $result = mysqli_query($conn, $query);
+session_start();
+if (isset($_SESSION['role'])) { 
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +11,7 @@ $result = mysqli_query($conn, $query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Management System</title>
+    <title>ATLAS</title>
     <link href="../css/styles.css" rel="stylesheet" />
     <style>
         body {
@@ -57,6 +59,19 @@ $result = mysqli_query($conn, $query);
             align-items: center;
             padding: 20px;
         }
+
+            /* If the screen size is 1200px wide or more, set the font-size to 80px */
+@media (min-width: 1200px) {
+  .responsive-font-example {
+    font-size: 20px;
+  }
+}
+/* If the screen size is smaller than 1200px, set the font-size to 80px */
+@media (max-width: 1199.98px) {
+  .responsive-font-example {
+    font-size: 10px;
+  }
+}
     </style>
 </head>
 <body>
@@ -71,9 +86,9 @@ $result = mysqli_query($conn, $query);
             <div class="text-center w-25 h-100 d-grid p-3 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
                 <p class="lead pt-3">Management System</p>
                 <p>v1.0.0</p>
-                <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.html" role="button">Application</a>
+                <a class="btn btn-lg btn-light btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.php" role="button">Reports</a>
-                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.html" role="button" style='background-color: #4DC8D9;'>Employees</a>
+                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.php" role="button" style='background-color: #4DC8D9;'>Employees</a>
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.php" role="button">Leave Management</a>
                 <br>
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
@@ -151,3 +166,8 @@ $result = mysqli_query($conn, $query);
     <script src="js/scripts.js"></script>
 </body>
 </html>
+<?php
+}else{
+	header("Location: ../login/login.php");
+} 
+?>

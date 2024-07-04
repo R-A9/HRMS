@@ -1,32 +1,40 @@
 <?php
-// Include your database connection script
+// Initialize database connection
 require_once('../functions/db-conn.php');
 
-// Check if POST data (id and status) is received
+// PHP script to handle AJAX request and update status in the database
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id']) && isset($_POST['status'])) {
-    // Sanitize input to prevent SQL injection
-    $id = mysqli_real_escape_string($conn, $_POST['id']);
-    $status = mysqli_real_escape_string($conn, $_POST['status']);
+    $id = $_POST['id'];
+    $status = $_POST['status'];
 
-    // Update query
+    // Update status in the database
     $query = "UPDATE applications SET status = '$status' WHERE id = '$id'";
+    $result = mysqli_query($conn, $query);
 
-    // Execute query
-    if (mysqli_query($conn, $query)) {
-        // Send a success response
-        http_response_code(200);
-        echo "Status updated successfully";
+    if ($result) {
+        if ($status == 'approved' && isset($_POST['flname']) && isset($_POST['email']) && isset($_POST['role']) && isset($_POST['contno'])) {
+            $flname = $_POST['flname'];
+            $email = $_POST['email'];
+            $role = 'Employee'; // Set role to Employee
+            $contno = $_POST['contno'];
+
+            // Insert data into credentials table with password set to '1234'
+            $password = '1234';
+            $query = "INSERT INTO credentials (email, password, name, role, contno) VALUES ('$email', '$password', '$flname', '$role', '$contno')";
+            $result = mysqli_query($conn, $query);
+
+            if ($result) {
+                http_response_code(200); // Success
+            } else {
+                http_response_code(500); // Server error
+            }
+        } else {
+            http_response_code(200); // Success for status update only
+        }
     } else {
-        // Send a server error response
-        http_response_code(500);
-        echo "Error updating status: " . mysqli_error($conn);
+        http_response_code(500); // Server error
     }
 } else {
-    // Send a bad request response if data is not received properly
-    http_response_code(400);
-    echo "Bad request - id and status parameters are required";
+    http_response_code(400); // Bad request
 }
-
-// Close database connection
-mysqli_close($conn);
 ?>

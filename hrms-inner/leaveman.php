@@ -3,11 +3,9 @@
 require_once('../functions/db-conn.php');
 $query = "select * from leaveapp INNER JOIN empcred WHERE status='pending'";
 $result = mysqli_query($conn,$query);
-/*
-session_start();
-if (isset($_SESSION['username'])) { {
 
-}*/
+session_start();
+if (isset($_SESSION['uid'])) { 
 
 ?>
 
@@ -20,7 +18,7 @@ if (isset($_SESSION['username'])) { {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Bare - Start Bootstrap Template</title>
+  <title>ATLAS</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Core theme CSS (includes Bootstrap)-->
@@ -42,6 +40,18 @@ if (isset($_SESSION['username'])) { {
                     align-items: center;
                     padding: 20px;
                 }
+            /* If the screen size is 1200px wide or more, set the font-size to 80px */
+@media (min-width: 1200px) {
+  .responsive-font-example {
+    font-size: 20px;
+  }
+}
+/* If the screen size is smaller than 1200px, set the font-size to 80px */
+@media (max-width: 1199.98px) {
+  .responsive-font-example {
+    font-size: 10px;
+  }
+}
   </style>
 </head>
 
@@ -61,9 +71,9 @@ if (isset($_SESSION['username'])) { {
       <div class="text-center w-25 h-100 d-grid p-3 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
         <p class="lead pt-3">Management System</p>
         <p>v1.0.0</p>
-        <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
+        <a class="btn btn-lg btn-light btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.php" role="button">Reports</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.html" role="button">Employees</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.php" role="button">Employees</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.php" role="button" style='background-color: #4DC8D9;'>Leave Management</a>
         <br>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
@@ -142,10 +152,10 @@ if (isset($_SESSION['username'])) { {
 </body>
 
 </html>
-<?php /*
+<?php 
 }else{
-	header("Location: ../login/login.php");
-} */
+	
+} 
 
  
 if(isset($_POST['approve'])){

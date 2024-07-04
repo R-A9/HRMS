@@ -1,9 +1,13 @@
 <?php
+ session_start();
 
-session_start();
+ require_once('../functions/db-conn.php');
+ $query = "select * from leaveapp INNER JOIN credentials WHERE status='pending' AND role='Employee'";;
+ $result = mysqli_query($conn,$query);
 
 
- if (isset($_SESSION['uid'])) {
+
+ if (isset($_SESSION['role'])) {
  ?> 
 
 
@@ -79,8 +83,9 @@ session_start();
       <div class="text-center w-25 h-100 d-grid p-2 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
         <p class="lead pt-3">Management System</p>
         <p>v1.0.0</p>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" style="background-color: #4DC8D9;" role="button">Leave Mgmt.</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leavemgmt.php" role="button">Leave Mgmt.</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php"  role="button">Leave Application</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leavemgmt.html" style="background-color: #4DC8D9;" role="button">Leave Mgmt.
+        </a>
         <br>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="../hrms-inner/main-page.html" role="button">Log-out</a>
         <br><br>
@@ -89,36 +94,42 @@ session_start();
 
       <!-- Flex container for fieldsets -->
       <div class="flex-grow-1 p-4">
-      <h1>Leave Application</h1>
+      <h1>Leave Management</h1>
       <hr>
         <!-- Start main code -->
         <div class="container d-flex justify-content-center">
           <div class="p-4 w-100" style="max-width: 700px;">
 
+          <div class="p-5 table-responsive">
+          <table id="table" class="table table-bordered table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Start Date</th>
+                <th scope="col" class="text-center">End Date</th>
+                <th scope="col" class="text-center">Reason</th>
+                <th scope="col" class="text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+                
+                <?php
+  
+                  while($row = mysqli_fetch_assoc($result))
+                  {
+                    ?>
+                    <td class="text-center"><?php echo $row['id']; ?></td>
+                    <td class="text-center"><?php echo $row['name']; ?></td>
+                    <td class="text-center"><?php echo $row['sdate']; ?></td>
+                    <td class="text-center"><?php echo $row['edate']; ?></td>
+                    <td class="text-center"><?php echo $row['reason']; ?></td>
+                    <td class="text-center"><?php echo $row['status']; ?></td>
+  
 
-
-            
-            <form method="post" action="action.php">
-              <div class="form-group mb-3">
-                <label for="start-date"><h3>Start Date:</h3></label>
-                <input type="date" class="form-control" id="sdate" name="sdate" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="end-date"><h3>End Date:</h3></label>
-                <input type="date" class="form-control" id="edate" name="edate" required>
-              </div>
-              <div class="form-group mb-4">
-                <label for="reason"><h3>Reason:</h3></label>
-                <textarea class="form-control" id="reason" name="reason" placeholder="Your reason here.." required></textarea>
-              </div>
-              <button type="submit" class="btn btn-success btn-block">Apply</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+     </td>
+                  </tr>
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
@@ -128,9 +139,7 @@ session_start();
 
 </html>
 <?php 
-}else{
+}}else{
 	header("Location: ../login/login.php");
 } 
-
-
 ?>
