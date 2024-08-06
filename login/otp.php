@@ -6,15 +6,23 @@
 <head>
 	<title>multi-user role-based-login-system</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/91f04e1fcd.js" crossorigin="anonymous"></script>
+<style>
+
+</style>
 </head>
+
 <body>
+
+
       <div class="container d-flex justify-content-center align-items-center"
       style="min-height: 100vh">
-      	<form class="border shadow p-3 rounded"
+
+      	<form class=" p-3  rounded"
       	      action="../functions/login-function.php" 
       	      method="post" 
-      	      style="width: 450px;">
-      	      <h1 class="text-center p-3">LOGIN</h1>
+      	      style="width: 500px;">
+      	      <h1 class="text-center pb-5 pt-3">Atlas IT Solutions Login</h1>
       	      <?php if (isset($_GET['error'])) { ?>
       	      <div class="alert alert-danger" role="alert">
 				  <?=$_GET['error']?>
@@ -22,34 +30,21 @@
 			  <?php } ?>
 		  <div class="mb-3">
 		    <label for="username" 
-		           class="form-label">User name</label>
+		           class="form-label">One-Time Password</label>
 		    <input type="text" 
 		           class="form-control" 
 		           name="email" 
-		           id="username">
+		           id="username"
+                   placeholder="Enter OTP..">
 		  </div>
-		  <div class="mb-3">
-		    <label for="password" 
-		           class="form-label">Password</label>
-		    <input type="password" 
-		           name="password" 
-		           class="form-control" 
-		           id="password">
-		  </div>
-		  <div class="mb-1">
-		    <label class="form-label">Select User Type:</label>
-		  </div>
-		  <select class="form-select mb-3"
-		          name="role" 
-		          aria-label="Default select example">
-			  <option selected value="Employee">Employee</option>
-			  <option value="HR">HR</option>
-		  </select>
-		 
-		  <button type="submit" 
-		          class="btn btn-primary">LOGIN</button>
+		<br>
+		  <center><button type="submit" 
+		          class="btn btn-primary">Continue</button></center>
+
+				<center><p class="pt-4">Going back to main page? Click <a href="../hrms-inner/main-page.html">here</a></></center>
 		</form>
       </div>
+
 </body>
 </html>
 <?php 
