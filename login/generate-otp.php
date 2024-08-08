@@ -34,7 +34,7 @@ if (isset($_POST['email'])) {
         $mail->Port       = 587;
         
         //Recipients
-        $mail->setFrom('no-reply@yourdomain.com', 'BURATSEC');
+        $mail->setFrom('no-reply@yourdomain.com', '<CompanyName>');
         $mail->addAddress($email);
         
         // Content
