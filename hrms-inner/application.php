@@ -129,6 +129,7 @@ if (isset($_SESSION['uid'])) {
             }
         }
     </style>
+    <script src="table2excel.js"></script>
 </head>
 <body>
     <!-- Your existing HTML body content -->
@@ -170,9 +171,10 @@ if (isset($_SESSION['uid'])) {
                         </form>
                     </div>
                 </div>
+                <div class="p-3"><button class="search-button bg-secondary" id="downloadexcel">Export to Excel</button></div>
                 <div class="table-container">
                     <div class="table-wrapper">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="example-table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col" class="text-center">ID</th>
@@ -196,6 +198,12 @@ if (isset($_SESSION['uid'])) {
                                 ?>
                             </tbody>
                         </table>
+                        <script>
+        document.getElementById('downloadexcel').addEventListener("click", () => {
+            var table2excel = new Table2Excel();
+            table2excel.export(document.querySelectorAll('#example-table'));
+        })
+    </script>
                     </div>
                 </div>
                 <nav aria-label="Page navigation">

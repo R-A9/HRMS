@@ -1,33 +1,30 @@
 <?php
 // Initialize database connection
 require_once('../functions/db-conn.php');
-
-// Fetch applications data
-$query = "SELECT * FROM applications";
-$result = mysqli_query($conn, $query);
 session_start();
-if (isset($_SESSION['role']) == "Employee") { 
-  // Set the number of entries per page
-  $entries_per_page = 10;
 
-  // Get the current page number from the query string (default is 1)
-  $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
+    // Set the number of entries per page
+    $entries_per_page = 10;
 
-  // Calculate the offset
-  $offset = ($current_page - 1) * $entries_per_page;
+    // Get the current page number from the query string (default is 1)
+    $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-  // Fetch total number of rows
-  $total_query = "SELECT COUNT(*) as total FROM applications";
-  $total_result = mysqli_query($conn, $total_query);
-  $total_row = mysqli_fetch_assoc($total_result);
-  $total_entries = $total_row['total'];
+    // Calculate the offset
+    $offset = ($current_page - 1) * $entries_per_page;
 
-  // Calculate total number of pages
-  $total_pages = ceil($total_entries / $entries_per_page);
+    // Fetch total number of rows
+    $total_query = "SELECT COUNT(*) as total FROM applications";
+    $total_result = mysqli_query($conn, $total_query);
+    $total_row = mysqli_fetch_assoc($total_result);
+    $total_entries = $total_row['total'];
 
-  // Fetch entries for the current page
-  $query = "SELECT * FROM applications LIMIT $offset, $entries_per_page";
-  $result = mysqli_query($conn, $query);
+    // Calculate total number of pages
+    $total_pages = ceil($total_entries / $entries_per_page);
+
+    // Fetch entries for the current page
+    $query = "SELECT id, flname, email, date, role, status FROM applications LIMIT $offset, $entries_per_page";
+    $result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -42,62 +39,31 @@ if (isset($_SESSION['role']) == "Employee") {
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="../css/styles.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Abel&family=Passion+One:wght@400;700;900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Abel&family=Passion+One:wght@400;700;900&family=Teko:wght@300..700&display=swap');
-    .header {
-      width: 100%;
-      text-align: left;
-      padding: 10px 0;
+    .charts-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .chart-container {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    canvas {
       background-color: #fff;
-      border-bottom: 1px solid #ccc;
-    }
-    .content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       padding: 20px;
-    }
-    /* If the screen size is 1200px wide or more, set the font-size to 20px */
-    @media (min-width: 1200px) {
-      .responsive-font-example {
-        font-size: 20px;
-      }
-    }
-    /* If the screen size is smaller than 1200px, set the font-size to 10px */
-    @media (max-width: 1199.98px) {
-      .responsive-font-example {
-        font-size: 10px;
-      }
-    }
-    .sort-arrow {
-      display: inline-block;
-      width: 0;
-      height: 0;
-      margin-left: 5px;
-      vertical-align: middle;
-      content: "";
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    .sort-arrow.asc {
-      border-bottom: 5px solid black;
-    }
-
-    .sort-arrow.desc {
-      border-top: 5px solid black;
-    }
-
-    .sort-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+    .summary-card {
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <!-- Responsive navbar-->
@@ -112,81 +78,68 @@ if (isset($_SESSION['role']) == "Employee") {
   <div class="container-fluid">
     <div class="d-flex">
       <!-- Sidebar -->
-      <div class="text-center w-25 h-100 d-grid p-3 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
-        <!-- Sidebar content here -->
+      <div class="text-center w-25 h-100 d-grid p-3 gap-4 col-md-auto bg-light">
         <p class="lead pt-3">Management System</p>
         <p>v1.0.0</p>
         <a class="btn btn-lg btn-light btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.php" role="button" style='background-color: #4DC8D9;'>Reports</a>
+        
+        <div class="btn-group">
+          <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" style="background-color: #4DC8D9;" role="button">Reports</a>
+          <button type="button" class="btn btn-light border-dark border border-3 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="violations.php">Violations and Complaints</a></li>
+              <li><a class="dropdown-item" href="recruitment-reports.php">Recruitment Reports</a></li>
+          </ul>
+        </div>
+        
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.php" role="button">Employees</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.php" role="button">Leave Management</a>
         <br>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
         <br><br>
-        <br>
       </div>
 
       <!-- Main content area -->
       <div class="container">
         <div class="header">
-          <h2 class="p-3">Recruitment Reports</h2>
+          <h2 class="p-3">Reports</h2>
         </div>
-        <div class="p-5 table-responsive">
-          <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col" class="text-center">ID</th>
-                <th scope="col" class="text-center sort-header" onclick="sortTable()">Name <span class="sort-arrow" id="sort-arrow"></span></th>
-                <th scope="col" class="text-center">E-mail</th>
-                <th scope="col" class="text-center">Date Provided</th>
-                <th scope="col" class="text-center">Role</th>
-                <th scope="col" class="text-center">Contact Number</th>
-                <th scope="col" class="text-center">Status</th>
-                <th scope="col" class="text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="table-body">
-              <?php
-              while ($row = mysqli_fetch_assoc($result)) {
-              ?>
-                <tr id="row_<?php echo $row['id']; ?>">
-                  <td class="text-center"><?php echo $row['id']; ?></td>
-                  <td class="text-center"><?php echo $row['flname']; ?></td>
-                  <td class="text-center"><?php echo $row['email']; ?></td>
-                  <td class="text-center"><?php echo $row['date']; ?></td>
-                  <td class="text-center"><?php echo $row['role']; ?></td>
-                  <td class="text-center"><?php echo $row['contno']; ?></td>
-                  <td class="text-center"><?php echo $row['status']; ?></td>
-                  <td class="text-center">
-                    <button class='btn btn-primary' name="approve" onclick="updateStatus(<?php echo $row['id']; ?>, 'approved')">Approve</button>
-                    <button class='btn btn-danger' onclick="updateStatus(<?php echo $row['id']; ?>, 'declined')">Decline</button>
-                  </td>
-                </tr>
-              <?php
-              }
-              ?>
-            </tbody>
-          </table>
-          <!-- Pagination Controls -->
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item <?php if ($current_page <= 1) echo 'disabled'; ?>">
-                                <a class="page-link" href="?page=<?php echo $current_page - 1; ?>" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <?php for ($page = 1; $page <= $total_pages; $page++): ?>
-                            <li class="page-item <?php if ($page == $current_page) echo 'active'; ?>">
-                                <a class="page-link" href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
-                            </li>
-                            <?php endfor; ?>
-                            <li class="page-item <?php if ($current_page >= $total_pages) echo 'disabled'; ?>">
-                                <a class="page-link" href="?page=<?php echo $current_page + 1; ?>" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+
+        <!-- Dashboard Content -->
+        <div class="row">
+          <!-- Top Section: Summary Cards -->
+          <div class="col-md-12 mb-4">
+            <div class="d-flex flex-wrap justify-content-between">
+              <div class="col-md-3 summary-card">
+                <h3>Total Employees</h3>
+                <p id="totalEmployees">120</p>
+              </div>
+              <div class="col-md-3 summary-card">
+                <h3>Active Employees</h3>
+                <p id="activeEmployees">100</p>
+              </div>
+              <div class="col-md-3 summary-card">
+                <h3>Employees on Leave</h3>
+                <p id="employeesOnLeave">10</p>
+              </div>
+              <div class="col-md-3 summary-card">
+                <h3>New Applications</h3>
+                <p id="newApplications">15</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Section: Charts -->
+          <div class="col-md-12 charts-container">
+            <div class="chart-container">
+              <canvas id="employeeChart"></canvas>
+            </div>
+            <div class="chart-container">
+              <canvas id="applicationChart"></canvas>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -194,70 +147,59 @@ if (isset($_SESSION['role']) == "Employee") {
 
   <!-- Bootstrap core JS and other scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
   <!-- Core theme JS-->
   <script src="js/scripts.js"></script>
-
   <script>
-function updateStatus(id, status) {
-    var row = document.getElementById('row_' + id);
-    var flname = row.querySelector('td:nth-child(2)').textContent;
-    var email = row.querySelector('td:nth-child(3)').textContent;
-    var role = row.querySelector('td:nth-child(5)').textContent;
-    var contno = row.querySelector('td:nth-child(6)').textContent;
+    // Chart.js Data and Configuration for Employee Chart
+    var employeeCtx = document.getElementById('employeeChart').getContext('2d');
+    var employeeChart = new Chart(employeeCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Active Employees', 'Employees on Leave'],
+        datasets: [{
+          label: 'Employees',
+          data: [100, 10], // Replace these values with actual data
+          backgroundColor: ['#4CAF50', '#FF5722']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'update-status.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            alert('Status updated successfully');
-            document.getElementById('row_' + id).querySelector('td:nth-child(7)').textContent = status; // Update status cell in the table
-            
-            // Hide the approve and decline buttons
-            row.querySelector('td:nth-child(8)').innerHTML = ''; 
-        } else {
-            alert('Error updating status');
-        }
-    };
-
-    xhr.send('id=' + id + '&status=' + status + '&flname=' + flname + '&email=' + email + '&role=' + role + '&contno=' + contno);
-}
-
-function sortTable() {
-  var table = document.getElementById("table-body");
-  var rows = Array.from(table.querySelectorAll("tr"));
-  var ascending = document.getElementById("sort-arrow").classList.toggle("asc");
-  document.getElementById("sort-arrow").classList.toggle("desc", !ascending);
-
-  rows.sort(function(a, b) {
-    var nameA = a.querySelector("td:nth-child(2)").textContent.toUpperCase();
-    var nameB = b.querySelector("td:nth-child(2)").textContent.toUpperCase();
-    if (ascending) {
-      return nameA < nameB ? -1 : (nameA > nameB ? 1 : 0);
-    } else {
-      return nameA > nameB ? -1 : (nameA < nameB ? 1 : 0);
-    }
-  });
-
-  rows.forEach(function(row) {
-    table.appendChild(row);
-  });
-}
+    // Chart.js Data and Configuration for Application Chart
+    var applicationCtx = document.getElementById('applicationChart').getContext('2d');
+    var applicationChart = new Chart(applicationCtx, {
+      type: 'pie',
+      data: {
+        labels: ['New Applications', 'Reviewed Applications'], // Replace these labels with actual data
+        datasets: [{
+          label: 'Applications',
+          data: [15, 85], // Replace these values with actual data
+          backgroundColor: ['#03A9F4', '#FFC107']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
   </script>
 </body>
 </html>
 
 <?php
-}else{
-	header("Location: ../login/login.php");
-} 
+} else {
+    header("Location: ../login/login.php");
+    exit();
+}
 
 // PHP script to handle AJAX request and update status in the database
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id']) && isset($_POST['status'])) {
-    $id = $_POST['id'];
-    $status = $_POST['status'];
+    $id = mysqli_real_escape_string($conn, $_POST['id']);
+    $status = mysqli_real_escape_string($conn, $_POST['status']);
 
     // Update status in the database
     $query = "UPDATE applications SET status = '$status' WHERE id = '$id'";
