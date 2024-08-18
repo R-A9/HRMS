@@ -87,6 +87,7 @@
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php"  role="button">Leave Application</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leavemgmt.html" style="background-color: #4DC8D9;" role="button">Leave Mgmt.
         </a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="complsub.php" role="button">Submit a Complaint</a>
         <br>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="../hrms-inner/main-page.html" role="button">Log-out</a>
         <br><br>

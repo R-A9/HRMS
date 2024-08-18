@@ -168,7 +168,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
     <div class="container-fluid">
         <div class="d-flex">
             <!-- Sidebar -->
-            <div class="text-center w-25 h-100 d-grid p-3 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
+            <div class="text-center bg-light w-25 h-100 d-grid p-3 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
                 <p class="lead pt-3">Management System</p>
                 <p>v1.0.0</p>
                 <a class="btn btn-lg btn-light btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
