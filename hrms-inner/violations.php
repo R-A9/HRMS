@@ -64,7 +64,7 @@ if (isset($_SESSION['role']) == "Employee") {
         <a class="btn btn-lg btn-light btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
         
         <div class="btn-group">
-            <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" style="background-color: #4DC8D9;" role="button">Reports</a>
+            <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" style="background-color: #4DC8D9;" href='reports.php' role="button">Reports</a>
             <button type="button" class="btn btn-light border-dark border border-3 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
@@ -93,6 +93,7 @@ if (isset($_SESSION['role']) == "Employee") {
               <tr>
                 <th scope="col" class="text-center">ID</th>
                 <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Title</th>
                 <th scope="col" class="text-center">Description</th>
                 <th scope="col" class="text-center">Date</th>
               </tr>
@@ -104,6 +105,7 @@ if (isset($_SESSION['role']) == "Employee") {
                 <tr>
                   <td class="text-center"><?php echo $row['id']; ?></td>
                   <td class="text-center"><?php echo $row['name']; ?></td>
+                  <td class="text-center"><?php echo $row['title']; ?></td>
                   <td class="text-center"><?php echo $row['description']; ?></td>
                   <td class="text-center"><?php echo $row['date']; ?></td>
                 </tr>
@@ -164,17 +166,16 @@ if (isset($_SESSION['role']) == "Employee") {
       <div class="modal-body">
         <form action="add_violation.php" method="post">
           <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
+            <label for="name" class="form-label">Name of Person in Viol/Reported</label>
             <input type="text" class="form-control" id="name" name="name" required>
           </div>
           <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            <label for="name" class="form-label">Title</label>
+            <input type="text" class="form-control" id="name" name="title" required>
           </div>
           <div class="mb-3">
-            <label for="date" class="form-label">Date</label>
-            <input type="date" class="form-control" id="date" name="date" required>
-          </div>
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea><br>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>

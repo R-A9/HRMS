@@ -144,7 +144,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
 
         /* Show the dropdown menu when hovering over the dropdown button */
         .btn-group:hover .dropdown-menu {
-            display: block;
+            display: inline-flexbox;
             margin-top: 0; /* Ensure the dropdown doesn't jump when displayed */
         }
 
@@ -172,7 +172,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
                 <p>v1.0.0</p>
                 <a class="btn btn-lg btn-light btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
                 <div class="btn-group">
-                    <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" style="background-color: #4DC8D9;" role="button">Reports</a>
+                    <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" style="background-color: #4DC8D9;" href='reports.php' role="button">Reports</a>
                     <button type="button" class="btn btn-light border-dark border border-3 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
@@ -203,7 +203,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
-                                <th scope="col" class="text-center sort-header" onclick="sortTable('flname')">Name <span class="sort-arrow" id="sort-arrow"></span></th>
+                                <th scope="col" class="text-center">Name <span class="sort-arrow" id="sort-arrow"></span></th>
                                 <th scope="col" class="text-center">E-mail</th>
                                 <th scope="col" class="text-center">Date Provided</th>
                                 <th scope="col" class="text-center">Role</th>

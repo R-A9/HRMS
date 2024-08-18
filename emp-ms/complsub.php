@@ -11,15 +11,14 @@ if (isset($_SESSION['uid'])) {
   }
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $sdate = $_POST['sdate'];
-      $edate = $_POST['edate'];
-      $reason = $_POST['reason'];
-      $employee_name = $_SESSION['name']; // Assuming 'employee_name' is stored in the session
-      $status = "pending";
+      $title = $_POST['title'];
+      $reason = $_POST['complaint'];
+      $name = $_SESSION['name']; // Assuming 'employee_name' is stored in the session
+      $date = date("Y/m/d");
 
       // Prepare and bind
-      $stmt = $conn->prepare("INSERT INTO leaveapp (sdate, edate, employee_name, reason, status) VALUES (?, ?, ?, ?, ?)");
-      $stmt->bind_param("sssss", $sdate, $edate, $employee_name, $reason, $status);
+      $stmt = $conn->prepare("INSERT INTO viol (name, title, description, date) VALUES (?, ?, ?, ?)");
+      $stmt->bind_param("ssss", $name, $title, $reason, $date);
 
       // Execute the query
       if ($stmt->execute()) {
@@ -100,9 +99,9 @@ if (isset($_SESSION['uid'])) {
       <div class="text-center w-25 h-100 d-grid p-2 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
         <p class="lead pt-3">Management System</p>
         <p>v1.0.0</p>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" style="background-color: #4DC8D9;" role="button">Leave Application.</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" role="button">Leave Application.</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leavemgmt.php" role="button">Leave Mgmt.</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="complsub.php" role="button">Submit a Complaint</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="complsub.php" style="background-color: #4DC8D9;" role="button">Submit a Complaint</a>
         <br>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="../hrms-inner/main-page.html" role="button">Log-out</a>
         <br><br>
@@ -111,23 +110,19 @@ if (isset($_SESSION['uid'])) {
 
       <!-- Flex container for fieldsets -->
       <div class="flex-grow-1 p-4">
-      <h1>Leave Application</h1>
+      <h1>Submit a Complaint</h1>
       <hr>
         <!-- Start main code -->
         <div class="container d-flex justify-content-center">
           <div class="p-4 w-100" style="max-width: 700px;">
             <form method="post" action="">
-              <div class="form-group mb-3">
-                <label for="start-date"><h3>Start Date:</h3></label>
-                <input type="date" class="form-control" id="sdate" name="sdate" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="end-date"><h3>End Date:</h3></label>
-                <input type="date" class="form-control" id="edate" name="edate" required>
+              <div class="form-group mb-4">
+                <label for="reason"><h3>Title:</h3></label>
+                <textarea class="form-control" id="reason" name="title" placeholder="Your reason here.." required></textarea>
               </div>
               <div class="form-group mb-4">
-                <label for="reason"><h3>Reason:</h3></label>
-                <textarea class="form-control" id="reason" name="reason" placeholder="Your reason here.." required></textarea>
+                <label for="complaint"><h3>Complaint:</h3></label>
+                <textarea class="form-control" id="complaint" name="complaint" placeholder="Your complaint here.." required></textarea>
               </div>
               <button type="submit" class="btn btn-success btn-block">Apply</button>
             </form>

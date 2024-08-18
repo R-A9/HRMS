@@ -3,7 +3,7 @@
 
  require_once('../functions/db-conn.php');
 
- $sql="SELECT * FROM leaveapp WHERE status='pending' AND employee_name='".$_SESSION['name']."'";
+ $sql="SELECT * FROM leaveapp WHERE status='pending' OR status='approved' AND employee_name='".$_SESSION['name']."' ";
  $result = mysqli_query($conn,$sql);
 
 

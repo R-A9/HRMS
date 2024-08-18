@@ -73,6 +73,7 @@ if (isset($_SESSION['role'])) {
   }
 }
     </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light border-bottom">
@@ -101,8 +102,10 @@ if (isset($_SESSION['role'])) {
                         <h2 class="">Employees</h2>
                     </div>
                 </div>
-                <div class="p-5 table-responsive">
-                    <table class="table table-bordered table-striped">
+                
+                <div class="p-3 table-responsive">
+                <button class="btn btn-secondary mb-5" id="downloadexcel">Export to Excel</button>
+                    <table class="table table-bordered table-striped" id="table">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col" class="text-center">id</th>
@@ -133,11 +136,17 @@ if (isset($_SESSION['role'])) {
                         ?>
                         </tbody>
                     </table>
+                    <script>
+                document.getElementById('downloadexcel').addEventListener("click", () => {
+                    var wb = XLSX.utils.table_to_book(document.querySelector('#table'), {sheet:"Sheet1"});
+                    XLSX.writeFile(wb, 'emp-list.xlsx');
+                });
+                </script>
                 </div>
             </div>
         </div>
         <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal dialog" role="document">
+<div cmodal dialog" role="document">
 <div class="modal-header">
 <h5 class="modal-title" id="exampleModalLabel"> Delete Student Data</h5>
 <button type="submit" name="deletedata" class="btn btn-danger">Fire Employee</button>
