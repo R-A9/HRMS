@@ -19,8 +19,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
     // Calculate the offset
     $offset = ($current_page - 1) * $entries_per_page;
 
-    // Fetch total number of rows with search filter
-    $total_query = "SELECT COUNT(*) as total FROM applications WHERE flname LIKE '%$search_query%'";
+    // Fetch total number of rows with search filter (names starting with search query)
+    $total_query = "SELECT COUNT(*) as total FROM applications WHERE flname LIKE '$search_query%'";
     $total_result = mysqli_query($conn, $total_query);
     $total_row = mysqli_fetch_assoc($total_result);
     $total_entries = $total_row['total'];
@@ -28,10 +28,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
     // Calculate total number of pages
     $total_pages = ceil($total_entries / $entries_per_page);
 
-    // Fetch entries for the current page with search filter
-    $query = "SELECT * FROM applications WHERE flname LIKE '%$search_query%' LIMIT $offset, $entries_per_page";
+    // Fetch entries for the current page with search filter (names starting with search query)
+    $query = "SELECT * FROM applications WHERE flname LIKE '$search_query%' LIMIT $offset, $entries_per_page";
     $result = mysqli_query($conn, $query);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -203,7 +204,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col" class="text-center">ID</th>
-                                <th scope="col" class="text-center">Name <span class="sort-arrow" id="sort-arrow"></span></th>
+                                <th scope="col" class="text-center sort-header" onclick="sortTable('flname')">Name <span class="sort-arrow" id="sort-arrow"></span></th>
                                 <th scope="col" class="text-center">E-mail</th>
                                 <th scope="col" class="text-center">Date Provided</th>
                                 <th scope="col" class="text-center">Role</th>
