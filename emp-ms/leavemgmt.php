@@ -2,8 +2,9 @@
  session_start();
 
  require_once('../functions/db-conn.php');
- $query = "select * from leaveapp INNER JOIN credentials WHERE status='pending' AND role='Employee'";;
- $result = mysqli_query($conn,$query);
+
+ $sql="SELECT * FROM leaveapp WHERE status='pending' AND employee_name='".$_SESSION['name']."'";
+ $result = mysqli_query($conn,$sql);
 
 
 
@@ -121,7 +122,7 @@
                   {
                     ?>
                     <td class="text-center"><?php echo $row['id']; ?></td>
-                    <td class="text-center"><?php echo $row['name']; ?></td>
+                    <td class="text-center"><?php echo $row['employee_name']; ?></td>
                     <td class="text-center"><?php echo $row['sdate']; ?></td>
                     <td class="text-center"><?php echo $row['edate']; ?></td>
                     <td class="text-center"><?php echo $row['reason']; ?></td>

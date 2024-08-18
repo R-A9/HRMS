@@ -25,6 +25,28 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
     // Fetch entries for the current page
     $query = "SELECT id, flname, email, date, role, status FROM applications LIMIT $offset, $entries_per_page";
     $result = mysqli_query($conn, $query);
+
+    // Fetch summary data
+    $applicants_query = "SELECT COUNT(*) AS total_applicants FROM applications";
+    $applicants_result = mysqli_query($conn, $applicants_query);
+    $applicants_row = mysqli_fetch_assoc($applicants_result);
+    $total_applicants = $applicants_row['total_applicants'];
+
+    $leave_query = "SELECT COUNT(*) AS total_leave FROM leaveapp WHERE status = 'approved'";
+    $leave_result = mysqli_query($conn, $leave_query);
+    $leave_row = mysqli_fetch_assoc($leave_result);
+    $total_leave = $leave_row['total_leave'];
+
+    $pending_query = "SELECT COUNT(*) AS pending_applications FROM applications WHERE status = 'pending'";
+    $pending_result = mysqli_query($conn, $pending_query);
+    $pending_row = mysqli_fetch_assoc($pending_result);
+    $pending_applications = $pending_row['pending_applications'];
+
+    $approved_query = "SELECT COUNT(*) AS approved_applications FROM applications WHERE status = 'approved'";
+    $approved_result = mysqli_query($conn, $approved_query);
+    $approved_row = mysqli_fetch_assoc($approved_result);
+    $approved_applications = $approved_row['approved_applications'];
+
 ?>
 
 <!DOCTYPE html>
@@ -113,20 +135,20 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
           <div class="col-md-12 mb-4">
             <div class="d-flex flex-wrap justify-content-between">
               <div class="col-md-3 summary-card">
-                <h3>Total Employees</h3>
-                <p id="totalEmployees">120</p>
-              </div>
-              <div class="col-md-3 summary-card">
-                <h3>Active Employees</h3>
-                <p id="activeEmployees">100</p>
+                <h3>Total Applicants</h3>
+                <p id="totalApplicants"><?php echo $total_applicants; ?></p>
               </div>
               <div class="col-md-3 summary-card">
                 <h3>Employees on Leave</h3>
-                <p id="employeesOnLeave">10</p>
+                <p id="employeesOnLeave"><?php echo $total_leave; ?></p>
               </div>
               <div class="col-md-3 summary-card">
-                <h3>New Applications</h3>
-                <p id="newApplications">15</p>
+                <h3>Pending Applications</h3>
+                <p id="pendingApplications"><?php echo $pending_applications; ?></p>
+              </div>
+              <div class="col-md-3 summary-card">
+                <h3>Approved Applications</h3>
+                <p id="approvedApplications"><?php echo $approved_applications; ?></p>
               </div>
             </div>
           </div>
@@ -156,10 +178,13 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
     var employeeChart = new Chart(employeeCtx, {
       type: 'bar',
       data: {
-        labels: ['Active Employees', 'Employees on Leave'],
+        labels: ['Total Applicants', 'Employees on Leave'],
         datasets: [{
           label: 'Employees',
-          data: [100, 10], // Replace these values with actual data
+          data: [
+            <?php echo $total_applicants; ?>, 
+            <?php echo $total_leave; ?>
+          ],
           backgroundColor: ['#4CAF50', '#FF5722']
         }]
       },
@@ -174,10 +199,13 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
     var applicationChart = new Chart(applicationCtx, {
       type: 'pie',
       data: {
-        labels: ['New Applications', 'Reviewed Applications'], // Replace these labels with actual data
+        labels: ['Pending Applications', 'Approved Applications'],
         datasets: [{
           label: 'Applications',
-          data: [15, 85], // Replace these values with actual data
+          data: [
+            <?php echo $pending_applications; ?>, 
+            <?php echo $approved_applications; ?>
+          ],
           backgroundColor: ['#03A9F4', '#FFC107']
         }]
       },

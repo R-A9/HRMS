@@ -1,15 +1,41 @@
 <?php
-
 session_start();
 
+if (isset($_SESSION['uid'])) {
+  // Database connection
+  $conn = new mysqli('localhost', 'root', '', 'hrms');
 
- if (isset($_SESSION['uid'])) {
- ?> 
+  // Check connection
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
 
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $sdate = $_POST['sdate'];
+      $edate = $_POST['edate'];
+      $reason = $_POST['reason'];
+      $employee_name = $_SESSION['name']; // Assuming 'employee_name' is stored in the session
+      $status = "pending";
+
+      // Prepare and bind
+      $stmt = $conn->prepare("INSERT INTO leaveapp (sdate, edate, employee_name, reason, status) VALUES (?, ?, ?, ?, ?)");
+      $stmt->bind_param("sssss", $sdate, $edate, $employee_name, $reason, $status);
+
+      // Execute the query
+      if ($stmt->execute()) {
+          echo "<script>alert('Leave application submitted successfully!');</script>";
+      } else {
+          echo "<script>alert('Error: " . $stmt->error . "');</script>";
+      }
+
+      // Close statement and connection
+      $stmt->close();
+      $conn->close();
+  }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -21,23 +47,18 @@ session_start();
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="../css/styles.css" rel="stylesheet" />
   <style>
-  
-
     .card {
       max-width: 700px;
       padding: 2rem;
     }
-
     .form-group {
       margin-bottom: 1.5rem;
     }
-
     .btn {
       padding: 0.75rem 1.25rem;
     }
   </style>
 </head>
-
 <body>
   <!-- Responsive navbar-->
   <nav class="navbar navbar-light py-0 navbar-expand-lg fixed-top pb-3">
@@ -79,7 +100,7 @@ session_start();
       <div class="text-center w-25 h-100 d-grid p-2 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
         <p class="lead pt-3">Management System</p>
         <p>v1.0.0</p>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" style="background-color: #4DC8D9;" role="button">Leave Mgmt.</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" style="background-color: #4DC8D9;" role="button">Leave Application.</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leavemgmt.php" role="button">Leave Mgmt.</a>
         <br>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="../hrms-inner/main-page.html" role="button">Log-out</a>
@@ -94,11 +115,7 @@ session_start();
         <!-- Start main code -->
         <div class="container d-flex justify-content-center">
           <div class="p-4 w-100" style="max-width: 700px;">
-
-
-
-            
-            <form method="post" action="action.php">
+            <form method="post" action="">
               <div class="form-group mb-3">
                 <label for="start-date"><h3>Start Date:</h3></label>
                 <input type="date" class="form-control" id="sdate" name="sdate" required>
@@ -125,12 +142,10 @@ session_start();
   <!-- Core theme JS-->
   <script src="../js/scripts.js"></script>
 </body>
-
 </html>
+
 <?php 
-}else{
-	header("Location: ../login/login.php");
+} else {
+  header("Location: ../login/login.php");
 } 
-
-
 ?>
