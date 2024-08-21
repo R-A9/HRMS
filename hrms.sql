@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2024 at 01:01 PM
+-- Generation Time: Aug 21, 2024 at 03:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,16 +43,16 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `flname`, `email`, `date`, `resume`, `role`, `contno`, `status`) VALUES
-(1, 'Moral, Andrie', 'moralandrie@gmail.com', '2024-07-16', 'uploads/google.pdf', 'Senior Backend', '+639031192857', 'Approved'),
-(2, 'Dawal, Giullian Marco C.', 'dawalgiullian@gmail.com', '2024-07-31', 'uploads/23.pdf', 'Junior Programmer', '+639031192957', 'Rejected'),
-(3, 'sdfasdfasdf', 'asdfasdfasdf', '2024-07-03', 'asdfasdfsdf', 'asdfsdf', 'asdfasdfa', 'Rejected'),
-(5, 'John Doe', 'johndoe@example.com', '2024-07-01', '', 'Admin', '123-456-7890', 'Rejected'),
+(1, 'Moral, Andrie', 'moralandrie@gmail.com', '2024-07-16', 'uploads/google.pdf', 'Senior Backend', '+639031192857', 'Rejected'),
+(2, 'Dawal, Giullian Marco C.', 'dawalgiullian@gmail.com', '2024-07-31', 'uploads/23.pdf', 'Junior Programmer', '+639031192957', 'Approved'),
+(3, 'sdfasdfasdf', 'asdfasdfasdf', '2024-07-03', 'asdfasdfsdf', 'asdfsdf', 'asdfasdfa', 'Approved'),
+(5, 'John Doe', 'johndoe@example.com', '2024-07-01', '', 'Admin', '123-456-7890', 'Approved'),
 (6, 'Jane Smith', 'janesmith@example.com', '2024-07-02', '', 'User', '123-456-7891', 'Approved'),
-(7, 'Michael Johnson', 'michaelj@example.com', '2024-07-03', '', 'User', '123-456-7892', 'Rejected'),
-(8, 'Emily Davis', 'emilyd@example.com', '2024-07-04', '', 'Moderator', '123-456-7893', 'Rejected'),
+(7, 'Michael Johnson', 'michaelj@example.com', '2024-07-03', '', 'User', '123-456-7892', 'Approved'),
+(8, 'Emily Davis', 'emilyd@example.com', '2024-07-04', '', 'Moderator', '123-456-7893', 'Approved'),
 (9, 'David Brown', 'davidbrown@example.com', '2024-07-05', '', 'Admin', '123-456-7894', 'Rejected'),
-(10, 'Jessica Wilson', 'jessicaw@example.com', '2024-07-06', '', 'User', '123-456-7895', 'Rejected'),
-(11, 'Christopher Taylor', 'christophert@example.com', '2024-07-07', '', 'User', '123-456-7896', 'Rejected'),
+(10, 'Jessica Wilson', 'jessicaw@example.com', '2024-07-06', '', 'User', '123-456-7895', 'Approved'),
+(11, 'Christopher Taylor', 'christophert@example.com', '2024-07-07', '', 'User', '123-456-7896', 'Approved'),
 (12, 'Amanda Miller', 'amandam@example.com', '2024-07-08', '', 'Moderator', '123-456-7897', 'pending'),
 (13, 'Daniel Anderson', 'daniela@example.com', '2024-07-09', '', 'User', '123-456-7898', 'pending'),
 (14, 'Sarah Thomas', 'saraht@example.com', '2024-07-10', '', 'Admin', '123-456-7899', 'pending'),
@@ -142,7 +142,7 @@ INSERT INTO `applications` (`id`, `flname`, `email`, `date`, `resume`, `role`, `
 (98, 'Madison Flores', 'madison.flores@yahoo.com', '2023-02-19', '', 'IT Support Technician', '3030303031', 'pending'),
 (99, 'Samuel Rogers', 'samuel.rogers@protonmail.com', '2023-03-14', '', 'Network Architect', '4040404041', 'pending'),
 (100, 'Victoria Murphy', 'victoria.murphy@hotmail.com', '2023-04-29', '', 'Systems Engineer', '5050505051', 'pending'),
-(101, 'Balls, Torture', 'ballstorture@gmail.com', '2024-08-01', '', 'Sexpert', '+639042296969', 'Approved');
+(101, 'Balls, Wilson', 'ballstorture@gmail.com', '2024-08-01', '', 'Cybersecurity Advisor', '+639042296969', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -164,30 +164,16 @@ CREATE TABLE `credentials` (
 --
 
 INSERT INTO `credentials` (`id`, `email`, `password`, `name`, `role`, `contno`) VALUES
-(6, 'giulliandawal@gmail.com', '1234', 'Dindo Dominguez', 'HR', '+639041192834'),
-(13, 'ddddddd@gmail.com', '1234', 'Dindo, Dominguez', 'Employee', ' 63102938483'),
-(14, 'lucas.baker@protonmail.com', '1234', 'Lucas Baker', 'Employee', '6060606060');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `empcred`
---
-
-CREATE TABLE `empcred` (
-  `empid` int(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `empcred`
---
-
-INSERT INTO `empcred` (`empid`, `email`, `name`, `password`) VALUES
-(6710, 'd.dominguez@gmail.com', 'Dindo Dominguez', '1234'),
-(6711, 'giulliandawal@gmail.com', 'Giullian Dawal', '1234');
+(1, 'johndoe@example.com', '1234', 'John Doe', 'Employee', '555-0100'),
+(2, 'janesmith@example.com', '1234', 'Jane Smith', 'Employee', '555-0101'),
+(3, 'michaeljohnson@example.com', '1234', 'Michael Johnson', 'Employee', '555-0102'),
+(4, 'emilydavis@example.com', '1234', 'Emily Davis', 'HR', '555-0103'),
+(5, 'robertbrown@example.com', '1234', 'Robert Brown', 'Employee', '555-0104'),
+(6, 'sarahwilson@example.com', '1234', 'Sarah Wilson', 'Employee', '555-0105'),
+(7, 'davidlee@example.com', '1234', 'David Lee', 'Employee', '555-0106'),
+(8, 'laurawhite@example.com', '1234', 'Laura White', 'HR', '555-0107'),
+(9, 'jamesharris@example.com', '1234', 'James Harris', 'Employee', '555-0108'),
+(10, 'jessicaking@example.com', '1234', 'Jessica King', 'Employee', '555-0109');
 
 -- --------------------------------------------------------
 
@@ -214,8 +200,15 @@ INSERT INTO `leaveapp` (`id`, `sdate`, `edate`, `reason`, `employee_name`, `stat
 (4, '2024-08-01', '2024-08-22', '1234', 'Lucas Baker', 'declined'),
 (5, '2024-08-01', '2024-08-31', '1234', 'Lucas Baker', 'approved'),
 (6, '2024-08-01', '2024-09-07', 'Vhouratte', 'Dindo, Dominguez', 'declined'),
-(7, '2024-08-01', '2024-08-24', 'f', 'Dindo, Dominguez', 'pending'),
-(8, '2024-08-01', '2024-08-15', '1', 'Lucas Baker', 'declined');
+(7, '2024-08-01', '2024-08-24', 'f', 'Dindo, Dominguez', 'approved'),
+(8, '2024-08-01', '2024-08-15', '1', 'Lucas Baker', 'declined'),
+(9, '2024-08-01', '2024-08-31', 'Mental wellness break', 'Michael Johnson', 'declined'),
+(10, '2024-08-01', '2024-08-31', '1234', 'Michael Johnson', 'approved'),
+(11, '2024-08-12', '2024-08-30', '121234', 'Michael Johnson', 'declined'),
+(12, '2024-08-02', '2024-08-31', '12', 'Michael Johnson', 'declined'),
+(13, '2012-12-12', '2043-12-12', '124125', 'Michael Johnson', 'approved'),
+(14, '1212-12-12', '1211-12-12', '1212', 'Michael Johnson', 'declined'),
+(15, '2024-08-08', '2024-08-14', '12', 'Michael Johnson', 'pending');
 
 -- --------------------------------------------------------
 
@@ -236,34 +229,17 @@ CREATE TABLE `viol` (
 --
 
 INSERT INTO `viol` (`id`, `name`, `title`, `description`, `date`) VALUES
-(1, 'John Doe', '', 'Unauthorized absence from work', '2024-08-01'),
-(2, 'Jane Smith', '', 'Late submission of project report', '2024-08-02'),
-(3, 'Michael Johnson', '', 'Violation of dress code', '2024-08-03'),
-(4, 'Emily Davis', '', 'Unprofessional behavior in a meeting', '2024-08-04'),
-(5, 'Robert Brown', '', 'Misuse of company resources', '2024-08-05'),
-(6, 'Linda Wilson', '', 'Failure to meet deadlines', '2024-08-06'),
-(7, 'David Clark', '', 'Insubordination', '2024-08-07'),
-(8, 'Patricia Miller', '', 'Unauthorized access to confidential files', '2024-08-08'),
-(9, 'Christopher Taylor', '', 'Negligence in duty', '2024-08-09'),
-(10, 'Jennifer Anderson', '', 'Violation of safety protocols', '2024-08-10'),
-(11, 'Matthew Thomas', '', 'Conflict with a coworker', '2024-08-11'),
-(12, 'Elizabeth Jackson', '', 'Unapproved leave', '2024-08-12'),
-(13, 'Joshua White', '', 'Improper use of company email', '2024-08-13'),
-(14, 'Sarah Harris', '', 'Failure to follow instructions', '2024-08-14'),
-(15, 'Andrew Martin', '', 'Use of offensive language', '2024-08-15'),
-(16, 'Megan Thompson', '', 'Poor performance in assigned tasks', '2024-08-16'),
-(17, 'Steven Garcia', '', 'Absence from mandatory training', '2024-08-17'),
-(18, 'Laura Martinez', '', 'Excessive personal phone use during work hours', '2024-08-18'),
-(19, 'Daniel Robinson', '', 'Repeated tardiness', '2024-08-19'),
-(20, 'Jessica Lewis', '', 'Failure to comply with company policies', '2024-08-20'),
-(21, 'BOOlean Marco', '', 'sinalsal yung guard', '2024-08-03'),
-(22, 'John Campbell', '', 'Caused a fight in the workplace', '2024-08-11'),
-(23, '12', '', '12', '2024-08-04'),
-(24, 'Dindo, Dominguez', 'Vouratte', 'Phousey', '2024-08-18'),
-(25, 'A', '', 'sadas', '2024-08-28'),
-(26, 'Doe, John', 'Security issue', 'Used third-party software to siphon customer data.', '2024-08-18'),
-(27, 'Lee, Yuan', 'Threat Actor', 'Caught using malware to plant a server rootkit.', '2024-08-18'),
-(28, '8.8.8.8', '111', '111', '2024-08-18');
+(1, 'John Doe', 'Late Arrival', 'Employee consistently arrives late to work by 15-30 minutes.', '2024-07-01'),
+(2, 'Jane Smith', 'Harassment Complaint', 'Reported inappropriate behavior from a colleague during work hours.', '2024-07-05'),
+(3, 'Michael Johnson', 'Absenteeism', 'Unapproved absence from work for three consecutive days.', '2024-07-10'),
+(4, 'Emily Davis', 'Unprofessional Behavior', 'Use of offensive language during a team meeting.', '2024-07-15'),
+(5, 'Robert Brown', 'Violation of Company Policy', 'Unauthorized access to confidential company data.', '2024-07-20'),
+(6, 'Sarah Wilson', 'Misuse of Company Resources', 'Using company equipment for personal tasks during work hours.', '2024-07-25'),
+(7, 'David Lee', 'Dress Code Violation', 'Repeated violations of the company’s dress code policy.', '2024-08-01'),
+(8, 'Laura White', 'Missed Deadlines', 'Consistent failure to meet project deadlines.', '2024-08-05'),
+(9, 'James Harris', 'Discrimination Complaint', 'Reported discriminatory remarks from a supervisor.', '2024-08-10'),
+(10, 'Jessica King', 'Insubordination', 'Refusal to follow a direct order from a manager.', '2024-08-15'),
+(11, 'Liming, Lian', 'Foul Language', 'Liming used derogatory and offensive comments towards a coworker.', '2024-08-21');
 
 --
 -- Indexes for dumped tables
@@ -279,13 +255,9 @@ ALTER TABLE `applications`
 -- Indexes for table `credentials`
 --
 ALTER TABLE `credentials`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `empcred`
---
-ALTER TABLE `empcred`
-  ADD PRIMARY KEY (`empid`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `name` (`name`);
 
 --
 -- Indexes for table `leaveapp`
@@ -316,22 +288,16 @@ ALTER TABLE `credentials`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `empcred`
---
-ALTER TABLE `empcred`
-  MODIFY `empid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6712;
-
---
 -- AUTO_INCREMENT for table `leaveapp`
 --
 ALTER TABLE `leaveapp`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `viol`
 --
 ALTER TABLE `viol`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
