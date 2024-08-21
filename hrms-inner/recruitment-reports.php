@@ -169,7 +169,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
         <div class="d-flex">
             <!-- Sidebar -->
             <div class="text-center bg-light w-25 h-100 d-grid p-3 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
-                <p class="lead pt-3">Management System</p>
+                <p class="lead pt-3">HR Management System</p>
                 <p>v1.0.0</p>
                 <a class="btn btn-lg btn-light btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
                 <div class="btn-group">
@@ -193,7 +193,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
             <!-- Main content area -->
             <div class="container">
                 <div class="header">
-                    <h2 class="p-3">Reports</h2>
+                    <h2 class="p-3">Recruitment Reports</h2>
                     <form class="search-form" method="get" action="recruitment-reports.php">
                         <input type="text" class="search-input" name="search" placeholder="Search by name" value="<?php echo htmlspecialchars($search_query); ?>">
                         <button class="search-button" type="submit">Search</button>

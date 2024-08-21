@@ -85,7 +85,7 @@ if (isset($_SESSION['role'])) {
     <div class="container-fluid">
         <div class="d-flex">
             <div class="text-center w-25 h-100 d-grid p-3 gap-4 col-md-auto bg-light" style="word-wrap:break-word; overflow:auto;">
-                <p class="lead pt-3">Management System</p>
+                <p class="lead pt-3">HR Management System</p>
                 <p>v1.0.0</p>
                 <a class="btn btn-lg btn-light btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.php" role="button">Reports</a>

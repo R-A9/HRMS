@@ -61,7 +61,7 @@ if (isset($_SESSION['uid'])) {
     <div class="container-fluid">
         <div class="d-flex">
             <div class="text-center bg-light w-25 h-100 d-grid p-3 gap-4 col-md-auto" style="word-wrap:break-word; overflow:auto;">
-                <p class="lead pt-3">Management System</p>
+                <p class="lead pt-3">HR Management System</p>
                 <p>v1.0.0</p>
                 <a class="btn btn-lg btn-light btn-block border border-3 border-dark fw-bolder" href="application.php" role="button">Application</a>
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="reports.php" role="button">Reports</a>
@@ -112,8 +112,8 @@ if (isset($_SESSION['uid'])) {
                                 <td class="text-center">
                                     <form action="leaveman.php" method="POST">
                                         <input type="hidden" name="id" value="<?php echo $row['id']; ?>"/>
-                                        <input type="submit" class='btn btn-primary' name="approve" value="Approve">
-                                        <input type="submit" class='btn btn-danger' name="delete" value="Decline">
+                                        <button type="submit" class='btn btn-primary' href="leaveman.php" name="approve">Approve</button>
+                                        <button type="submit" class='btn btn-danger' href="leaveman.php" name="delete">Decline</button>
                                     </form>
                                 </td>
                             </tr>

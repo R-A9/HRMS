@@ -59,64 +59,49 @@ if (isset($_SESSION['uid'])) {
   </style>
 </head>
 <body>
-  <!-- Responsive navbar-->
-  <nav class="navbar navbar-light py-0 navbar-expand-lg fixed-top pb-3">
-    <div class="container-fluid">
-      <img src="../images/atlas2.png" style="width: 50px; height: 50px;">
-      <a class="navbar-brand" href="#">ATLAS-HRMS</a>
-      <div class="d-flex order-lg-1 ml-auto pr-2">
-        <!-- !!!!!!!!!!Everything below this comment, wag niyong pakikialaman!!!!!!!!!!!!!! -->
-        <span class="dot" style="color:white; padding-right: 5px;"></span>
-        <a href="#" class="navbar-text"><i class="fa fa-shopping-cart fa-lg" style="color: white;"></i></a>
-        <ul class="navbar-nav flex-row to-hide-nav">
-          <li class="nav-item mx-2 mx-lg-0">
-            <a class="nav-link" href="#"></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"></a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#"><span class="sr-only"></span></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- End of untouchable code, everything below this is subject to change -->
-
-  <!-- Page content-->
-  <div class="container-fluid pt-5">
-    <div class="d-flex">
-      <div class="text-center w-25 h-100 d-grid p-2 gap-4 col-md-auto" style="background-color:#D9D9D9; word-wrap:break-word; overflow:auto;">
-        <p class="lead pt-3">Management System</p>
-        <p>v1.0.0</p>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leave.php" role="button">Leave Application.</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leavemgmt.php" role="button">Leave Mgmt.</a>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="complsub.php" style="background-color: #4DC8D9;" role="button">Submit a Complaint</a>
-        <br>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="../hrms-inner/main-page.html" role="button">Log-out</a>
-        <br><br>
-        <br>
-      </div>
-
-      <!-- Flex container for fieldsets -->
-      <div class="flex-grow-1 p-4">
-      <h1>Submit a Complaint</h1>
-      <hr>
+<!-- Sidebar -->
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 250px; height: 100vh; position: fixed;">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <img src="../images/atlas2.png" alt="ATLAS" width="40" height="40" class="me-2">
+    <span class="fs-4">ATLAS-HRMS</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a href="leave.php" class="nav-link text-white fw-bold">
+        Leave Application
+      </a>
+    </li>
+    <li>
+      <a href="leavemgmt.php" class="nav-link text-white fw-bold">
+        Leave Management
+      </a>
+    </li>
+    <li>
+      <a href="complsub.php" class="nav-link text-white fw-bold"  style="background-color: #4DC8D9;">
+        Submit a Complaint
+      </a>
+    </li>
+  </ul>
+  <hr>
+  <div class="dropdown">
+    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="../assets/pfp.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+      <strong><?php echo $_SESSION['name']; ?>  </strong>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+      <li><a class="dropdown-item" href="#">Profile</a></li>
+      <li><a class="dropdown-item" href="#">Settings</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="../hrms-inner/main-page.html">Log-out</a></li>
+    </ul>
+  </div>
+</div>
         <!-- Start main code -->
-        <div class="container d-flex justify-content-center">
+        <div class="pt-3container d-flex justify-content-center">
           <div class="p-4 w-100" style="max-width: 700px;">
             <form method="post" action="">
-              <div class="form-group mb-4">
+              <div class="form-group pt-5 mb-4">
                 <label for="reason"><h3>Title:</h3></label>
                 <textarea class="form-control" id="reason" name="title" placeholder="Your reason here.." required></textarea>
               </div>

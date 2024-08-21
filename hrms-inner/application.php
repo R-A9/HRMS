@@ -144,7 +144,7 @@ if (isset($_SESSION['uid'])) {
         <div class="d-flex">
             <div class="text-center w-25 h-100 d-grid p-3 gap-4 col-md-auto bg-light"
                 style="word-wrap:break-word; overflow:auto;">
-                <p class="lead pt-3">Management System</p>
+                <p class="lead pt-3">HR Management System</p>
                 <p>v1.0.0</p>
                 <a class="btn btn-lg btn-block border border-3 border-dark fw-bolder" href="application.php"
                     role="button" style='background-color: #4DC8D9;'>Application</a>
@@ -181,6 +181,7 @@ if (isset($_SESSION['uid'])) {
                                     <th scope="col" class="text-center">Name</th>
                                     <th scope="col" class="text-center">E-mail</th>
                                     <th scope="col" class="text-center">Contact Number</th>
+                                    <th scope="col" class="text-center">CV</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -192,6 +193,8 @@ if (isset($_SESSION['uid'])) {
                                     <td class="text-center"><?php echo $row['flname']; ?></td>
                                     <td class="text-center"><?php echo $row['email']; ?></td>
                                     <td class="text-center"><?php echo $row['contno']; ?></td>
+                                    <td class="text-center"><button class="btn btn-xs btn-block border border-3 border-dark fw-bolder"  onclick="window.open('../<?php echo $row['resume']; ?>')"
+                                    role="button" style='background-color: #4DC8D9;'>Download CV</></button></td>
                                 </tr>
                                 <?php
                                 }
