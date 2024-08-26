@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2024 at 03:49 PM
+-- Generation Time: Aug 26, 2024 at 10:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -173,7 +173,9 @@ INSERT INTO `credentials` (`id`, `email`, `password`, `name`, `role`, `contno`) 
 (7, 'davidlee@example.com', '1234', 'David Lee', 'Employee', '555-0106'),
 (8, 'laurawhite@example.com', '1234', 'Laura White', 'HR', '555-0107'),
 (9, 'jamesharris@example.com', '1234', 'James Harris', 'Employee', '555-0108'),
-(10, 'jessicaking@example.com', '1234', 'Jessica King', 'Employee', '555-0109');
+(10, 'jessicaking@example.com', '1234', 'Jessica King', 'Employee', '555-0109'),
+(15, 'giulliandawal@gmail.com', '1234', 'Giullian Marco', 'Employee', '+639031192857'),
+(17, 'pepesdawal627@gmail.com', '1234', 'Pepes', 'HR', '639012293845');
 
 -- --------------------------------------------------------
 
@@ -285,7 +287,7 @@ ALTER TABLE `applications`
 -- AUTO_INCREMENT for table `credentials`
 --
 ALTER TABLE `credentials`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `leaveapp`

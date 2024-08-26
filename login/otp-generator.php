@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
         header("Location: verify-otp.php");
         exit();
     } catch (Exception $e) {
-        $error = "Failed to send OTP. Please try again. Mailer Error: {$mail->ErrorInfo}";
+        $otperror = "Failed to send OTP. Please try again. Mailer Error: {$mail->ErrorInfo}";
     }
 }
 
