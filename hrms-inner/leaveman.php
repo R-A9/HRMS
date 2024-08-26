@@ -90,7 +90,7 @@ if (isset($_SESSION['role'])=="HR")  {
                 <div class="p-3 table-responsive">
                     <button class="btn btn-secondary mb-3" id="downloadexcel">Export to Excel</button>
 
-                    <table id="table" class="table table-bordered table-striped">
+                    <table id="table" class="table table-responsive table-bordered table-striped">
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col" class="text-center">ID</th>

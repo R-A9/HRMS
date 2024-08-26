@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
         $mail->isSMTP();                           // Send using SMTP
         $mail->Host       = 'smtp.gmail.com';      // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                  // Enable SMTP authentication
-        $mail->Username   = '';  // Your email address
-        $mail->Password   = '';   // Your app-specific password
+        $mail->Username   = 'ic.wilkins.custodio@cvsu.edu.ph';  // Your email address
+        $mail->Password   = 'bvmi hjni mwbk tbkf';   // Your app-specific password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
         $mail->Port       = 587;                   // TCP port to connect to
 
