@@ -3,7 +3,7 @@ require_once('../functions/db-conn.php');
 
 session_start();
 
-if (isset($_SESSION['uid'])) {
+if (isset($_SESSION['role'])=="HR")  {
 
     // Select all pending leaves for the logged-in employee
     $sql = "SELECT * FROM leaveapp WHERE status='pending'";
@@ -51,6 +51,10 @@ if (isset($_SESSION['uid'])) {
         <script src="table2excel.js"></script>
     </head>
     <body>
+    <?php if ($_SESSION['role'] == 'Employee') {
+    header('Location: ../emp-ms/index.php');
+  }
+ ?>
     <nav class="navbar navbar-expand-lg navbar-light border-bottom">
         <a class="navbar-brand" href="#">
             <img src="../images/atlas2.png" style="width:50px; height:50px;" alt="Atlas IT Solutions">
@@ -68,7 +72,8 @@ if (isset($_SESSION['uid'])) {
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.php" role="button">Employees</a>
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.php" role="button" style='background-color: #4DC8D9;'>Leave Management</a>
                 <br>
-                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
+                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder responsive-font-example" href="../login/sess-dest.php"
+                    role="button">Log-out</a>
                 <br><br>
                 <br>
             </div>

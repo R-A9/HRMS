@@ -1,17 +1,26 @@
 <?php 
 $pdo = require "../functions/db-conn.php";
 session_start();
-if (isset($_SESSION['uid'])) { 
-  
 
-  
-  
-  ?>
+// Check if the user is authenticated
+if (!isset($_SESSION['role'])) {
+    // If not authenticated, redirect to login page
+    header('Location: ../login/login.php');
+    exit();
+}
 
+// Redirect Employees to the employee management system
+if ($_SESSION['role'] == 'Employee') {
+    header('Location: ../emp-ms/index.php');
+    exit();
+}
+
+// If the user is HR, continue with the page rendering
+if ($_SESSION['role'] == 'HR') { 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -23,38 +32,28 @@ if (isset($_SESSION['uid'])) {
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/styles.css" rel="stylesheet" />
     <style>
-        /* If the screen size is 1200px wide or more, set the font-size to 80px */
-@media (min-width: 1200px) {
-  .responsive-font-example {
-    font-size: 20px;
-  }
-}
-/* If the screen size is smaller than 1200px, set the font-size to 80px */
-@media (max-width: 1199.98px) {
-  .responsive-font-example {
-    font-size: 10px;
-  }
-}
+        /* Responsive font example */
+        @media (min-width: 1200px) {
+            .responsive-font-example {
+                font-size: 20px;
+            }
+        }
+        @media (max-width: 1199.98px) {
+            .responsive-font-example {
+                font-size: 10px;
+            }
+        }
     </style>
 </head>
 
 <body>
-
-<?php if ($_SESSION['role'] == 'Employee') {
-    header('Location: ../emp-ms/index.php');
-  }
- ?>
     <!-- Responsive navbar-->
-
     <nav class="navbar navbar-expand-lg navbar-light border-bottom">
         <a class="navbar-brand" href="#">
             <img src="../images/atlas2.png" style="width:50px; height:50px;" alt="Atlas IT Solutions">
             Atlas IT Solutions
         </a>
     </nav>
-
-    <!-- End of untouchable code, everything below this is subject to change -->
-
 
     <!-- Page content-->
     <div class="container-fluid h-100">
@@ -66,14 +65,15 @@ if (isset($_SESSION['uid'])) {
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder responsive-font-example" href="application.php"
                     role="button">Application</a>
 
-                <a class="btn  btn-light btn-lg btn-block border border-3 border-dark fw-bolder responsive-font-example" href="reports.php"
+                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder responsive-font-example" href="reports.php"
                     role="button">Reports</a>
 
                 <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder responsive-font-example" href="employees.php"
                     role="button">Employees</a>
-                    <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder responsive-font-example" href="leaveman.php" role="button" >Leave Management</a>
+                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder responsive-font-example" href="leaveman.php"
+                    role="button">Leave Management</a>
                 <br>
-                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder responsive-font-example" href="../login/login.php"
+                <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder responsive-font-example" href="../login/sess-dest.php"
                     role="button">Log-out</a>
                 <br><br>
                 <br>
@@ -88,7 +88,9 @@ if (isset($_SESSION['uid'])) {
 </html>
 
 <?php 
-}else{
-	header("Location: login/login.php");
-} 
+} else {
+    // If the user doesn't have a valid role, redirect to the login page
+    header('Location: ../login/login.php');
+    exit();
+}
 ?>

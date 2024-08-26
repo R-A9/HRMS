@@ -7,6 +7,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   $myusername = mysqli_real_escape_string($conn,$_POST['email']);
   $mypassword = mysqli_real_escape_string($conn,$_POST['password']);
 
+  $_SESSION['gotmail'] = $myusername;
+
   $sql = "SELECT * FROM credentials WHERE email = '$myusername' and password = '$mypassword'";
   $result = mysqli_query($conn,$sql);
   $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -16,10 +18,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   $role = isset($row['role']);
 
     if($role == 'HR'){
-        $link = '../hrms-inner/index.php';
+        $link = '../login/verify-otp.php';
     }
     elseif($role == 'Employee'){
-        $link = '../emp-ms/index.php';
+        $link = '../login/verify-otp.php';
     }
     else{
         $link = '404.php';

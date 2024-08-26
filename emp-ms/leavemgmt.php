@@ -61,156 +61,157 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "Employee") {
     }
 
     @media (max-width: 992px) {
-    .sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100%;
-    transition: all 0.3s;
-  }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100%;
+        transition: all 0.3s;
+      }
 
-  .sidebar.active {
-    left: 0;
-  }
+      .sidebar.active {
+        left: 0;
+      }
 
-  .main-content {
-    margin-left: 0;
-  }
-}
+      .main-content {
+        margin-left: 0;
+      }
+    }
 
-@media (min-width: 993px) {
-  .sidebar {
-    width: 250px;
-    height: 100vh;
-    position: fixed;
-  }
+    @media (min-width: 993px) {
+      .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+      }
 
-  .main-content {
-    margin-left: 250px;
-  }
-}
+      .main-content {
+        margin-left: 250px;
+      }
+    }
 
-.sidebar .nav-link.active {
-  background-color: #4DC8D9 !important;
-}
+    .sidebar .nav-link.active {
+      background-color: #4DC8D9 !important;
+    }
 
-.sidebar .dropdown-menu {
-  position: static !important;
-  float: none;
-  margin-top: 1rem;
-}
-    
+    .sidebar .dropdown-menu {
+      position: static !important;
+      float: none;
+      margin-top: 1rem;
+    }
 
-    .table th, .table td {
+    .table th,
+    .table td {
       white-space: nowrap;
-      padding: 200px;
     }
   </style>
 </head>
 
 <body>
-
+<?php if ($_SESSION['role'] == 'HR') {
+    header('Location: ../hrms-inner/index.php');
+  }
+ ?>
 
   <!-- Sidebar -->
   <button class="btn btn-dark sidebar-toggle d-lg-none" type="button">
-  <i class="fas fa-bars"></i>
-</button>
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 250px; height: 100vh; position: fixed;">
-  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-    <img src="../images/atlas2.png" alt="ATLAS" width="40" height="40" class="me-2">
-    <span class="fs-4">ATLAS-EMPMS</span>
-  </a>
-  <hr>
-  <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item">
-      <a href="leave.php" class="nav-link text-white fw-bold">
-        Leave Application
-      </a>
-    </li>
-    <li>
-      <a href="leavemgmt.html" class="nav-link text-white fw-bold active" style="background-color: #4DC8D9;">
-        Leave Management
-      </a>
-    </li>
-    <li>
-      <a href="complsub.php" class="nav-link text-white fw-bold">
-        Submit a Complaint
-      </a>
-    </li>
-  </ul>
-  <hr>
-  <div class="dropdown">
-    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-      <img src="../assets/pfp.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
-      <strong><?php echo $_SESSION['name']; ?></strong>
+    <i class="fas fa-bars"></i>
+  </button>
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 250px; height: 100vh; position: fixed;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <img src="../images/atlas2.png" alt="ATLAS" width="40" height="40" class="me-2">
+      <span class="fs-4">ATLAS-EMPMS</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-      <li><a class="dropdown-item" href="logout.php" >Log-out</a></li>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="leave.php" class="nav-link text-white fw-bold">
+          Leave Application
+        </a>
+      </li>
+      <li>
+        <a href="leavemgmt.html" class="nav-link text-white fw-bold active" style="background-color: #4DC8D9;">
+          Leave Management
+        </a>
+      </li>
+      <li>
+        <a href="complsub.php" class="nav-link text-white fw-bold">
+          Submit a Complaint
+        </a>
+      </li>
     </ul>
+    <hr>
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="../assets/pfp.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+        <strong><?php echo $_SESSION['name']; ?></strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+        <li><a class="dropdown-item" href="logout.php">Log-out</a></li>
+      </ul>
+    </div>
   </div>
-</div>
 
-      <!-- Flex container for fieldsets -->
-      <div class="flex-grow-1 pt-4">
-        <!-- Start main code -->
-        <div class="container d-flex justify-content-center">
-          <div class="p-4 w-100" style="max-width: 700px;">
-            <div class="p-3">
-              <table id="table" class="table table-bordered table-striped">
-                <thead class="thead-dark">
+  <!-- Flex container for fieldsets -->
+  <div class="container-fluid main-content">
+    <div class="row justify-content-center">
+      <!-- Start main code -->
+      <div class="col-lg-8 col-md-10 col-sm-12">
+        <div class="px-5 pt-5">
+          <div class="px-5 pt-5 card-body">
+            <table id="table" class="table table-bordered table-striped text-center">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Reason</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
                   <tr>
-                    <th scope="col" class="text-center">ID</th>
-                    <th scope="col" class="text-center">Name</th>
-                    <th scope="col" class="text-center">Start Date</th>
-                    <th scope="col" class="text-center">End Date</th>
-                    <th scope="col" class="text-center">Reason</th>
-                    <th scope="col" class="text-center">Status</th>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['employee_name']; ?></td>
+                    <td><?php echo $row['sdate']; ?></td>
+                    <td><?php echo $row['edate']; ?></td>
+                    <td><?php echo $row['reason']; ?></td>
+                    <td><?php echo $row['status']; ?></td>
                   </tr>
-                </thead>
-                <tbody>
-                  <?php
-                    while($row = mysqli_fetch_assoc($result)) {
-                  ?>
-                  <tr>
-                    <td class="text-center"><?php echo $row['id']; ?></td>
-                    <td class="text-center"><?php echo $row['employee_name']; ?></td>
-                    <td class="text-center"><?php echo $row['sdate']; ?></td>
-                    <td class="text-center"><?php echo $row['edate']; ?></td>
-                    <td class="text-center"><?php echo $row['reason']; ?></td>
-                    <td class="text-center"><?php echo $row['status']; ?></td>
-                  </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
-            </div>
+                <?php } ?>
+              </tbody>
+            </table>
 
             <!-- Pagination -->
             <nav aria-label="Page navigation">
               <ul class="pagination justify-content-center">
                 <?php
-                  // Display the previous button
-                  if ($page > 1) {
-                    echo '<li class="page-item"><a class="page-link" href="leavemgmt.php?page=' . ($page - 1) . '">«</a></li>';
-                  }
+                // Display the previous button
+                if ($page > 1) {
+                  echo '<li class="page-item"><a class="page-link" href="leavemgmt.php?page=' . ($page - 1) . '">«</a></li>';
+                }
 
-                  // Display the page numbers
-                  for ($i = 1; $i <= $total_pages; $i++) {
-                    if ($i == $page) {
-                      echo '<li class="page-item active"><a class="page-link" href="#">' . $i . '</a></li>';
-                    } else {
-                      echo '<li class="page-item"><a class="page-link" href="leavemgmt.php?page=' . $i . '">' . $i . '</a></li>';
-                    }
+                // Display the page numbers
+                for ($i = 1; $i <= $total_pages; $i++) {
+                  if ($i == $page) {
+                    echo '<li class="page-item active"><a class="page-link" href="#">' . $i . '</a></li>';
+                  } else {
+                    echo '<li class="page-item"><a class="page-link" href="leavemgmt.php?page=' . $i . '">' . $i . '</a></li>';
                   }
+                }
 
-                  // Display the next button
-                  if ($page < $total_pages) {
-                    echo '<li class="page-item"><a class="page-link" href="leavemgmt.php?page=' . ($page + 1) . '">»</a></li>';
-                  }
+                // Display the next button
+                if ($page < $total_pages) {
+                  echo '<li class="page-item"><a class="page-link" href="leavemgmt.php?page=' . ($page + 1) . '">»</a></li>';
+                }
                 ?>
               </ul>
             </nav>
-
           </div>
         </div>
       </div>
@@ -221,17 +222,17 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "Employee") {
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-  var sidebarToggle = document.querySelector(".sidebar-toggle");
-  var sidebar = document.querySelector(".sidebar");
+      var sidebarToggle = document.querySelector(".sidebar-toggle");
+      var sidebar = document.querySelector(".sidebar");
 
-  sidebarToggle.addEventListener("click", function() {
-    sidebar.classList.toggle("active");
-  });
-});
-</script>
+      sidebarToggle.addEventListener("click", function() {
+        sidebar.classList.toggle("active");
+      });
+    });
+  </script>
   <!-- Core theme JS-->
   <script src="../js/scripts.js"></script>
 </body>

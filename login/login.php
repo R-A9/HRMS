@@ -1,6 +1,8 @@
 <?php 
    session_start();
-   if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {   ?>
+   if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) { 
+
+  ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +21,7 @@
       style="min-height: 100vh">
 
       	<form class=" p-3  rounded"
-      	      action="../functions/login-function.php" 
+      	      action="otp-generator.php" 
       	      method="post" 
       	      style="width: 500px;">
       	      <h1 class="text-center pb-5 pt-3">Atlas IT Solutions Login</h1>
@@ -30,7 +32,7 @@
 			  <?php } ?>
 		  <div class="mb-3">
 		    <label for="username" 
-		           class="form-label">User name</label>
+		           class="form-label">E-mail</label>
 		    <input type="text" 
 		           class="form-control" 
 		           name="email" 

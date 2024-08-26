@@ -1,10 +1,18 @@
 <?php
-
 session_start();
 
-if (isset($_SESSION['role']) && $_SESSION['role'] == "Employee") {
- ?> 
+// Redirect HR users to HRMS inner index page
+if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
+    header('Location: ../hrms-inner/index.php');
+    exit(); // Ensure no further code is executed after redirection
+}
 
+// Redirect users who are not authenticated to the login page
+if (!isset($_SESSION['role'])) {
+    header("Location: ../login/login.php");
+    exit(); // Ensure no further code is executed after redirection
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,11 +69,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "Employee") {
       <li><a class="dropdown-item" href="#">Profile</a></li>
       <li><a class="dropdown-item" href="#">Settings</a></li>
       <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="../hrms-inner/main-page.html">Log-out</a></li>
+      <li><a class="dropdown-item" href="../login/sess-dest.php">Log-out</a></li>
     </ul>
   </div>
 </div>
-        
 
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -76,7 +83,4 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "Employee") {
 
 </html>
 <?php 
-}else{
-	header("Location: ../login/login.php");
-} 
 ?>

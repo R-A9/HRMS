@@ -3,7 +3,7 @@
 require_once('../functions/db-conn.php');
 session_start();
 
-if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
+if (isset($_SESSION['role'])=="HR")  {
     // Set the number of entries per page
     $entries_per_page = 10;
 
@@ -88,6 +88,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
+<?php if ($_SESSION['role'] == 'Employee') {
+    header('Location: ../emp-ms/index.php');
+  }
+ ?>
   <!-- Responsive navbar-->
   <nav class="navbar navbar-expand-lg navbar-light border-bottom">
     <a class="navbar-brand" href="#">
@@ -119,7 +124,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == "HR") {
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="employees.php" role="button">Employees</a>
         <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="leaveman.php" role="button">Leave Management</a>
         <br>
-        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder" href="main-page.html" role="button">Log-out</a>
+        <a class="btn btn-light btn-lg btn-block border border-3 border-dark fw-bolder responsive-font-example" href="../login/sess-dest.php"
+                    role="button">Log-out</a>
         <br><br>
       </div>
 

@@ -177,6 +177,10 @@ $query = "SELECT * FROM applications WHERE flname LIKE '$search_query%' LIMIT, $
   
 </head>
 <body>
+<?php if ($_SESSION['role'] == 'Employee') {
+    header('Location: ../emp-ms/index.php');
+  }
+ ?>
   <!-- Responsive navbar-->
   <nav class="navbar navbar-expand-lg navbar-light border-bottom">
     <a class="navbar-brand" href="#">
