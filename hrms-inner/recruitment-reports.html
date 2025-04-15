@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS - Recruitment</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <a class="navbar-brand" href="#">
+            <img src="../images/atlas2.png" style="width:50px; height:50px;" alt="Atlas IT Solutions">
+            HRMS Dashboard
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="employees.html">Employees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="leaveman.html">Leave Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="violations.html">Violations</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="recruitment-reports.html">Recruitment</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../login/login.html">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Recruitment Reports</h2>
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Application ID</th>
+                                <th>Applicant Name</th>
+                                <th>Position</th>
+                                <th>Application Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>APP001</td>
+                                <td>James Wilson</td>
+                                <td>Software Developer</td>
+                                <td>2025-04-10</td>
+                                <td><span class="badge badge-info">Under Review</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info">View CV</button>
+                                    <button class="btn btn-sm btn-success">Schedule Interview</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>APP002</td>
+                                <td>Maria Garcia</td>
+                                <td>UI/UX Designer</td>
+                                <td>2025-04-12</td>
+                                <td><span class="badge badge-warning">Interview Scheduled</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info">View CV</button>
+                                    <button class="btn btn-sm btn-primary">Interview Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>APP003</td>
+                                <td>Robert Taylor</td>
+                                <td>Project Manager</td>
+                                <td>2025-04-13</td>
+                                <td><span class="badge badge-success">Shortlisted</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info">View CV</button>
+                                    <button class="btn btn-sm btn-success">Schedule Final Interview</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
